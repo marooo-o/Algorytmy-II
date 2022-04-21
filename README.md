@@ -1,4 +1,3 @@
-Bardzo mi miło, że mogę edytować Panów rozwiązanie.
 # Algorytmy-II
 **Projekt na przedmiot Algorytny II**
 
