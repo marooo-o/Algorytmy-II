@@ -80,6 +80,40 @@ struct graph {
         return 0;
     }
 
+    // ford-fulkerson
+ int maxflow() {
+        int flow = 0, new_flow;
+        // szukana jest sciezka powiekszajaca
+        while (new_flow = bfs()) { // konczymy jezeli nie istnieje dodatnia sciezka powiekszajaca
+            flow += new_flow; // dodajemy do przeplywu ilosc o ktora zostal powiekszony
+            int current = t;
+            while (current != s) { // od ujscia do zrodla przechodzimy po znalezionej sciezce
+                int prev = parent[current];
+
+                // odejmujemy od pojemnosci znaleziony przeplyw i dodajemy go w odwrotna strone
+                // zgodnie z algorytmem
+                cap[prev][current] -= new_flow;
+                cap[current][prev] += new_flow;
+                current = prev;
+            }
+        }
+
+        return flow;
+ }
+
+ void add_edge(int u, int v, int capacity) {
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+        cap[u][v] = cap[v][u] = capacity;
+ }
+
+ void add_directed_edge(int u, int v, int capacity) {
+        adj[u].push_back(v);
+        cap[u][v] = capacity;
+    }
+};
+
+
 // struktura zawierajaca wszystkie informacje o swiecie
 struct world {
     // ilosc zboza produkowana przez pola
