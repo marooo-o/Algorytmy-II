@@ -155,37 +155,35 @@ void loadDate(vector<vector<Point>> &quartersOfTheKingdom){
     }
 }
 
+vector<vector<Point>> findBordersOfQuatersOfTheKingdom(vector<vector<Point>> &quartersOfTheKingdom){
+    vector<vector<Point>> bordersOfQuatersOfTheKingdom;
+    
+    bordersOfQuatersOfTheKingdom.resize(quartersOfTheKingdom.size());
+    
+    for(int i=0; i<quartersOfTheKingdom.size(); i++){
+        bordersOfQuatersOfTheKingdom[i] = convexHull(quartersOfTheKingdom[i]);
+    }
+    
+    return bordersOfQuatersOfTheKingdom;
+}
+
 
 int main(){
     
-    Point point = Point(1,2);
+
+    vector<vector<Point>> quartersOfTheKingdom;
+    vector<vector<Point>> bordersOfQuatersOfTheKingdom;
     
-    vector<Point> ar;
-    ar.push_back(Point(0,0));
-    ar.push_back(Point(0,4));
-    ar.push_back(Point(-4,0));
-    ar.push_back(Point(5,0));
-    ar.push_back(Point(0,-6));
-    ar.push_back(Point(1,0));
+    loadDate(quartersOfTheKingdom);
+    bordersOfQuatersOfTheKingdom = findBordersOfQuatersOfTheKingdom(quartersOfTheKingdom);
     
     
-    
-    
-    vector<Point> hull = convexHull(ar);
-    
-    for(int i = 0; i < hull.size(); i++){
-        cout<<hull[i];
+    for(int i=0; i<bordersOfQuatersOfTheKingdom.size(); i++){
+        cout<<endl<<endl;
+        for(int j=0; j<bordersOfQuatersOfTheKingdom[i].size(); j++){
+            cout<<bordersOfQuatersOfTheKingdom[i][j];
+        }
     }
-    
-    
-    
-    
-
-   
-    
-    
-  
-
     
     
     return 0;

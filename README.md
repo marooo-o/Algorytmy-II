@@ -41,3 +41,37 @@ Out:
 ```
 
 ![](https://i.imgur.com/MPVHWMj.png)
+
+
+##Paragraf III
+
+
+Aby wczytać dane o ćwiartkach królestwa podejemy kolejno
+
+n - ilość ćwiartek królestwa, 
+m - wczytujemy n razy ilość punktów granicznych w każdej ćwiartce
+
+następnie wczytujemy punkty każdej ćwiartki
+
+*PRZYKŁAD*
+
+```
+Input:
+2
+8
+6
+0 3
+1 1
+2 2
+4 4
+0 0
+1 2
+3 1
+3 3
+0 0
+0 4
+-4 0
+5 0
+0 -6
+1 0
+```
