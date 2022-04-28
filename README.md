@@ -41,10 +41,10 @@ Olivier Sokołowski
 
 Adam Rudlicki
 
--projektowanie wejscia dla algorytmu minimalnego koszty
--wczytywanie danych z pliku
--algorytm najtańszej śieżki
--max flow min cost
+- projektowanie wejscia dla algorytmu minimalnego koszty
+- wczytywanie danych z pliku
+- algorytm najtańszej śieżki
+- max flow min cost
 
 ##Paragraf I
 
