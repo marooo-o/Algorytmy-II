@@ -1,0 +1,13 @@
+(ilość pół, browarow, karczm i skrzyżowań)
+a, b, c, d
+
+(a razy produkcja z pól)
+12
+34
+11
+
+(c razy pojemnosc karczm)
+34
+52
+35
+
