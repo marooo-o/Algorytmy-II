@@ -21,12 +21,21 @@ Oliwer Mroczkowski
 - przygotowanie struktur, ich zależności i funkcji w nich występujących,
   koniecznych do poprawnego działania programu
 - skontruowanie programu głównego projektu (main)
-- zaprogramowanie odpo
-  wiedniego wejścia wraz z walidacją
+- zaprogramowanie odpowiedniego wejścia wraz z walidacją
   wpisywanych liczb/obiektów
 - zaprogramowanie funkcji w programie, które odpowiadają
   za funkcjonalność algorytmów (bfs, konstruowanie grafu)
 - przygotowanie dowodu działania algorytmów
+
+---------------------------------------------------------
+
+Olivier Sokołowski
+
+- wczytanie danych
+- otoczka wypukła
+- znajdowanie granic królestwa
+- przynależność punktu do wielokąta
+- przydział pól do ćwiartek
 
 ##Paragraf I
 
