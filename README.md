@@ -37,6 +37,15 @@ Olivier Sokołowski
 - przynależność punktu do wielokąta
 - przydział pól do ćwiartek
 
+---------------------------------------------------------
+
+Adam Rudlicki
+
+-projektowanie wejscia dla algorytmu minimalnego koszty
+-wczytywanie danych z pliku
+-algorytm najtańszej śieżki
+-max flow min cost
+
 ##Paragraf I
 
 *OBSŁUGA*
