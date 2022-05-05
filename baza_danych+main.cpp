@@ -457,9 +457,9 @@ int main() {
         cout << "Wczytuje dane z pliku..." << endl; cout << "  [||||||||||||||||||  ]  90%" << endl; usleep(20000); system("cls");
         cout << "Wczytuje dane z pliku..." << endl; cout << "  [||||||||||||||||||| ]  95%" << endl; usleep(20000); system("cls");
         cout << "Wczytuje dane z pliku..." << endl; cout << "  [||||||||||||||||||||]  100%" << endl; usleep(40000); system("cls");
-        cout << "Udalo sie wczytac wszystkie wartosci" << endl;
+        cout << "Udalo sie wczytac wszystkie wartosci" << endl; //wyswietlanie "ladowania" :)
         cout << n_objects << " " << n_roads << " " << fields_produce << endl;
-        world w(n_roads, fields_produce);
+        world w(n_roads, fields_produce); 
         // input
         for (int i = 1; i <= n_objects; ++i) {
                 char c;
