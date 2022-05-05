@@ -109,13 +109,13 @@ Out:
     Jedna z tych warstw będzie służyła przedstawieniu przepływu piwa, a druga przepływowi zboża, w związku z tym,
     w jednej z nich na krawędziach wagami (/przepustowościami) będą przepustowości zboża a w drugiej piwa. 
     Także wiemy, że w browarze można przerobić daną ilość x zboża na x piwa. Oznacza to, że w takim grafie,
-    istnieje krawędź pomiędzy oboma wierzchołkami odpowiednimi danemu browarowi, której przepustowość to x.
+    istnieje krawędź pomiędzy obydwoma wierzchołkami odpowiednimi danemu browarowi, której przepustowość to x.
     Do browaru wpłynie maksymalnie x zboża, całe zboże jakie wpłynie zostanie przetworzone na piwo, 
     czyli przepłynie do drugiego grafu tą krawędzią i będzie wypływać z browaru jako zboże. 
 
     Do naszego grafu brakuje dodać tylko dwa sztuczne wierzchołki - źródło i odpływ.
     Chcemy, żeby z każdego pola mogło wypływać limit zboża, gdzie limit to limit produkcji każdego z pól. 
-    Jest to równoznacznie ze stworzeniem krawędzi źródło - pole o przepustowości limit. 
+    Jest to równoznaczne ze stworzeniem krawędzi źródło - pole o przepustowości limit. 
     Tworzymy, więc takie krawędzie dla każdego pola i analogicznie od każdej karczmy prowadzimy krawędź do odpływu.
     Po zaaplikowaniu dowolnego algorytmu maksymalnego przepływu na tak skonstruowanym grafie dostajemy odpowiedź.
 
