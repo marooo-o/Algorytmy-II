@@ -1,23 +1,13 @@
 #include <iostream>
-
 #include <vector>
-
 #include <limits>
-
 #include <queue>
-
 #include <random>
-
 #include <cassert>
-
 #include <ctime>
-
 #include <fstream>
-
 #include <chrono>
-
 #include <thread>
-
 #include <unistd.h>
 
 using namespace std;
@@ -61,7 +51,6 @@ struct graph {
         vector < vector < int >> flow; // wartosc przeplywu
         queue < int > excess_vertices; // nadmiar wierzcholkow
         vector < int > height, excess, seen;
-
         graph(size_t n, int s, int t): n(n), s(s), t(t), adj(n), cap(n, vector < int > (n)), parent(n),
                 height(n), excess(n), flow(n, vector < int > (n)) {}
 
@@ -210,7 +199,7 @@ struct world {
         vector < tavern > taverns;
 
         world(int n_roads, int fields_produce): fields_produce(fields_produce), roads(n_roads) {}
-
+        
         // funkcja do przetransformowania swiata w graf
         graph to_graph() {
                 int n = fields.size() + intersections.size() + breweries.size() + taverns.size();
@@ -364,7 +353,7 @@ int rand_between(int a, int b) {
         return gen() % (b - a + 1) + a;
 }
 world random_world() {
-        int n_roads = 100, n_objects = 100, flow_size = 100;
+        int n_roads = 100, n_objects = 100, flow_size = 100; //deklaracja zmiennych
         world w(n_roads, rand_between(1, flow_size));
 
         // used up roads
@@ -408,33 +397,37 @@ world random_world() {
 }
 
 void test() {
+        int loop=0;
         while (true) {
-                world w = random_world();
+                loop++;
+                world w = random_world(); //wygenerowanie swiata w sposob losowy
                 graph g1 = w.to_graph(), g2 = w.to_graph();
                 int res_ford = g1.ford_fulkerson(), res_pr = g2.push_relabel();
                 if (res_ford != res_pr) {
-                        cout << "WRONG " << res_ford << " " << res_pr << endl;
+                        cout << "test number " << loop << ": WRONG " << res_ford << " " << res_pr << endl;
                         w.print();
                         exit(0);
                 } else {
-                        cout << "CORRECT " << res_ford << endl;
+                        cout << "test number " << loop << ": CORRECT, " << res_ford << " = " << res_pr << endl;
+                        //w.print();
                 }
         }
 }
 
 int main() {
-        system("color a");
+        system("cls");
+        system("color a"); //zmiana koloru cmd
         #ifdef TEST
-        test();
+        test(); //przeprowadzanie testow (powinno byc CORRECT)
         #endif
         int n_objects, n_roads, fields_produce;
         //cin >> n_objects >> n_roads >> fields_produce;
         cout << "Program liczacy maksymalny przeplyw piwa" << endl;
-        cout << "ktory mozna dostarczyc za pomoca drog z brawrow do karczm" << endl;
-        cout << "biorac pod uwage skrzyzowania" << endl;
+        cout << "ktory mozna dostarczyc za pomoca drog z browarow do karczm" << endl;
+        cout << "biorac pod uwage wystepujace skrzyzowania" << endl;
         usleep(800000);usleep(800000);usleep(800000);usleep(800000);usleep(800000);
         system("cls");
-        ifstream IN("in.txt");
+        ifstream IN("in2.txt");
         IN >> n_objects >> n_roads >> fields_produce;
         cout << "Wczytuje dane z pliku..." << endl; cout << "  [                    ]  0%" << endl; usleep(20000); system("cls");
         cout << "Wczytuje dane z pliku..." << endl; cout << "  [|                   ]  5%" << endl; usleep(20000); system("cls");
@@ -458,7 +451,8 @@ int main() {
         cout << "Wczytuje dane z pliku..." << endl; cout << "  [||||||||||||||||||| ]  95%" << endl; usleep(20000); system("cls");
         cout << "Wczytuje dane z pliku..." << endl; cout << "  [||||||||||||||||||||]  100%" << endl; usleep(40000); system("cls");
         cout << "Udalo sie wczytac wszystkie wartosci" << endl; //wyswietlanie "ladowania" :)
-        cout << n_objects << " " << n_roads << " " << fields_produce << endl;
+        cout << "oczekiwany wynik to: 11";
+        //cout << n_objects << " " << n_roads << " " << fields_produce << endl;
         world w(n_roads, fields_produce); 
         // input
         for (int i = 1; i <= n_objects; ++i) {
@@ -518,7 +512,8 @@ int main() {
         graph g = w.to_graph();
         int flow = g.push_relabel();
         // assert(w.to_graph().push_relabel() == flow);
-        cout << endl << endl << flow << endl;
+
+        cout << endl << endl << "maksymalnych przeplyw z" << "danych znajdujacych sie w wejscu to: " << flow << endl;
         IN.close();
         return 0;
 }
