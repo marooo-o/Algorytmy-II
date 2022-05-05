@@ -1,5 +1,5 @@
-(ilość pół, browarow, karczm i skrzyżowań)
-a, b, c, d
+(ilość pół (a), browarow (b), karczm (c), skrzyżowań (d) i dróg (e) )
+a, b, c, d, e
 
 (a razy produkcja z pól)
 12
@@ -10,4 +10,10 @@ a, b, c, d
 34
 52
 35
+12
 
+e razy linia postaci: w x y z, gdzie:
+ - w jest postaci "p"l, "b"m lub "s"n (1 ≤ l ≤ a  ∧  1 ≤ m ≤ b  ∧  1 ≤ n ≤ d)
+ - x jest postaci "b"m, "s"n lub "k"o (1 ≤ m ≤ b  ∧  1 ≤ n ≤ b  ∧  1 ≤ o ≤ c)
+ - y maksymalny przepływ na drodze w x
+ - z koszt transportu na drodze w x
