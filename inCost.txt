@@ -1,2 +1,42 @@
+2 3 3 12 33
+
 3
-12 32 13
+4
+
+5
+6
+2
+
+p1 s1
+p1 s2
+p2 s1
+p2 s3
+s1 s2
+s1 s3
+s1 s4
+s2 s4
+s3 s5
+s3 b2
+s4 b1
+s5 b2
+s5 b3
+b1 s6
+b2 s6
+b2 s7
+b3 s6
+b3 s7
+b3 s8
+s6 s9
+s7 s8
+s7 s9
+s8 s11
+s8 k3
+s9 s10
+s9 s11
+s10 s12
+s10 k1
+s11 s12
+s11 k2
+s11 k3
+s12 k1
+s12 k2
