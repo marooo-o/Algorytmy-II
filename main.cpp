@@ -168,22 +168,126 @@ vector<vector<Point>> findBordersOfQuatersOfTheKingdom(vector<vector<Point>> &qu
 }
 
 
+//sprawdzanie czy punkt q leży na odciku p r
+bool onStraightaway(Point p, Point q, Point r){
+    if(q.x >= min(p.x, r.x) && q.x <= max(p.x, r.x) && q.y >= min(p.y, r.y) && q.y<=max(p.y, r.y))
+       return true;
+       return false;
+}
+
+bool checkThatTheSegmentsIntersect(Point p, Point q, Point r, Point s){
+    
+    int d1 = det(p, q, r);
+    int d2 = det(p, q, s);
+    int d3 = det(r, s, p);
+    int d4 = det(r, s, q);
+    
+  
+  
+    
+    //punkty p, q, r są współliniowe i r leży na odciku pq
+    if(d1 == 0 && onStraightaway(p,r,q)) return true;
+    
+    //punkty r, s, q są współliniowe i q leży na odniku rs
+    if(d4 == 0 && onStraightaway(r, q, s)) return true;
+    
+    
+    
+    //przypadek podstawowy, czyli p i q leżą po przeciwnych stronach odcinka rs, a punkty r i s leżą po przeciwnych stronach pq
+    if(d1 != d2 && d3 != d4) return true;
+    
+    
+    return false;
+}
+
+//punkty muszą być podane przeciwnie do wskazówek zegara
+vector<Point>belongingToAConvexPolygon(vector<Point> points, vector<Point> convexPolygon){
+    vector<Point> pointsInConvexPolygon;
+
+    
+    int maxX = convexPolygon[0].x;
+    //szukam najbardziej na prawo x z otoczki
+    for(int i=0; i<convexPolygon.size(); i++){
+        if(maxX < convexPolygon[i].x){
+            maxX = convexPolygon[i].x;
+        }
+    }
+
+    maxX += 100;
+
+    int intersection;
+
+    for(int i = 0; i < points.size(); i++){
+
+        Point s = Point(maxX, points[i].y);
+        intersection = 0;
+
+        int next = 0;
+        int h = 0;
+        
+        do{
+            next = (h+1)%convexPolygon.size();
+            
+                if(max(convexPolygon[h].y, convexPolygon[next].y) >= points[i].y
+                   && min(convexPolygon[h].y, convexPolygon[next].y) < points[i].y
+                   && det(convexPolygon[h], convexPolygon[next], points[i]) != det(convexPolygon[h], convexPolygon[next], s)
+                   && det(points[i], s, convexPolygon[h]) != det(points[i], s, convexPolygon[next])){
+                intersection++;
+            }
+            
+            
+            h = next;
+            
+        }while(h != 0);
+
+        if(intersection&1){
+            pointsInConvexPolygon.push_back(points[i]);
+        }
+        
+    }
+
+
+    return pointsInConvexPolygon;
+}
+
+
+
 int main(){
     
 
-    vector<vector<Point>> quartersOfTheKingdom;
-    vector<vector<Point>> bordersOfQuatersOfTheKingdom;
     
-    loadDate(quartersOfTheKingdom);
-    bordersOfQuatersOfTheKingdom = findBordersOfQuatersOfTheKingdom(quartersOfTheKingdom);
+    vector<Point> points;
+    vector<Point> polygon;
+    
+    polygon.push_back(Point(0,0));
+    polygon.push_back(Point(5,0));
+    polygon.push_back(Point(5,5));
+    polygon.push_back(Point(0,7));
     
     
-    for(int i=0; i<bordersOfQuatersOfTheKingdom.size(); i++){
-        cout<<endl<<endl;
-        for(int j=0; j<bordersOfQuatersOfTheKingdom[i].size(); j++){
-            cout<<bordersOfQuatersOfTheKingdom[i][j];
-        }
+   
+    points.push_back(Point(0,5));
+    points.push_back(Point(-3,7));
+    points.push_back(Point(2,5));
+    points.push_back(Point(2,0));
+    points.push_back(Point(2,1));
+    points.push_back(Point(0,0));
+    points.push_back(Point(0,1));
+    points.push_back(Point(1,1));
+
+
+    vector<Point> pointsInConvexPolygon = belongingToAConvexPolygon(points, polygon);
+
+    for(int i=0; i<pointsInConvexPolygon.size(); i++){
+        cout<<pointsInConvexPolygon[i];
     }
+
+   
+   
+    
+    
+    
+
     
     
     return 0;
