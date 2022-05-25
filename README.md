@@ -60,10 +60,45 @@ Fields:
 
 ```
  ---------------------------------------------------------
- ### *Pole 1*
-![pole 3](https://user-images.githubusercontent.com/82097861/170314182-bb0b2a8f-8cfe-41a2-b3ca-998608a47bb8.png)
-
-### *Pole 2*
+ ### Podgląd wizualny podanych pól i ćwiartek
+ 
+![pole 3](https://user-images.githubusercontent.com/82097861/170314182-bb0b2a8f-8cfe-41a2-b3ca-998608a47bb8.png) 
 ![pole 2 -p](https://user-images.githubusercontent.com/82097861/170314641-ac1cc41c-d978-4a79-9c19-b1d17206c715.png)
+
+ ---------------------------------------------------------
+ 
+ ### *OUTPUT*
+ 
+ ```
+granice cwiartki nr: 1
+-2 8
+6 4
+8 4
+8 6
+4 10
+0 10
+pola wewnątrz cwiartki nr : 1
+0 8
+2 8
+4 8
+4 6
+6 6
+
+granice cwiartki nr: 2
+-8 4
+-6 2
+-4 1
+-2 4
+-2 6
+-4 8
+-8 8
+pola wewnątrz cwiartki nr : 2
+-6 6
+-3 6
+-6 4
+-4 4
+-4 2
+
+ ```
 
 
