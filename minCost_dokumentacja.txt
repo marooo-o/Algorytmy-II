@@ -1,3 +1,4 @@
+WEJSCIE:
 (ilość pół (a), browarow (b), karczm (c), skrzyżowań (d) i dróg (e) )
 a, b, c, d, e
 
@@ -19,3 +20,7 @@ e razy linia postaci: w x y z, gdzie:
  - x jest postaci "b"m, "s"n lub "k"o (1 ≤ m ≤ b  ∧  1 ≤ n ≤ b  ∧  1 ≤ o ≤ c) (b-browar, s-skrzyżowanie, k-karczma)
  - y maksymalny przepływ na drodze w x
  - z koszt transportu na drodze w x
+ 
+ 
+ WYNIK:
+ program wypisuje jedna liczbe int ktora jest wartosci minimalnego kosztu przeplywu
