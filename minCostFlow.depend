@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1653508917 source:c:\users\w¹¿\documents\github\algorytmy-ii\main.cpp
+1653509839 source:c:\users\w¹¿\documents\github\algorytmy-ii\main.cpp
 	"minCostFlow.h"
 
-1653508817 source:c:\users\w¹¿\documents\github\algorytmy-ii\min_cost_input.cpp
+1653509789 source:c:\users\w¹¿\documents\github\algorytmy-ii\min_cost_input.cpp
 	"minCostFlow.h"
 
-1653508837 c:\users\w¹¿\documents\github\algorytmy-ii\mincostflow.h
+1653509774 c:\users\w¹¿\documents\github\algorytmy-ii\mincostflow.h
 	<iostream>
 	<fstream>
 	<string>

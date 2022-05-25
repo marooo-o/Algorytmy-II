@@ -1,11 +1,13 @@
 #include "minCostFlow.h"
 
 int main() {
+    string fileName = "inCost.txt";
+
     minCostFlow mcf;
-    cout << "HERE_1" << endl;
-    mcf.readInput();
-    cout << "HERE_2" << endl;
+
+    mcf.readInput(fileName);
+
     mcf.minCost(mcf.cap, mcf.cost);
-    cout << "HERE_3" << endl;
+
     return 0;
 }

@@ -3,14 +3,14 @@
 
 using namespace std;
 
-void minCostFlow::readInput()
+void minCostFlow::readInput(string fileName)
 {
     int tmp;
     int fieldNum, breweryNum, innNum, crossNum, roadNum;
     int maks;
     string roadStart, roadEnd, flow, cost;
 
-    ifstream in("inCost.txt");
+    ifstream in(fileName);
     in >> fieldNum >> breweryNum >> innNum >> crossNum >> roadNum;
     maks = fieldNum + breweryNum + crossNum + innNum+2;
 
