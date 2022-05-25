@@ -45,7 +45,7 @@ Input:
 -8 4
 
 Fields: 
-10
+10 <------ ilość pól
 0 8
 2 8
 4 8
@@ -100,5 +100,14 @@ pola wewnątrz cwiartki nr : 2
 -4 2
 
  ```
+ 
+ ### *Dowód*
 
+Opisany problem podziału królestwa można rozwiązać reprezentująć ćwiartki jako rozłączne wielokąty wypukłe, a pola jako punkty które leżą w ich wnętrzu. 
+
+Problem można przedstawić jako poszukiwanie otoczki wypukłej oraz przynależenia punktu do wielokąta w tym wypadku wypukłego. Spośród zbioru punktów granicznych każdej ćwiartki, które rozkazał zebrać Samwise, wybieramy podzbiór który tworzy najmniejszy wielokąt wypukły zawierający wszystkie punkty. W tym celu w rozwiązaniu został wykorzystany Algorytm Jarvisa, który polega na tym aby znaleźć punktu p0 o najmniejszej współrzędnej y, jeśli takich jest kilka, bierzemy ten o najmniejszej współrzędnej x. Następnie bierzemy punkt s dowolny, różny od p0 i powtarzamy dla punktów, które nie są jeszcze w otoczce. Jeśli punkt pi leży na prawo od wektora p0s weź go jako s i powtarzamy aż znajdziemy całą otoczkę. 
+
+Podstawowym faktem z geometrii obliczeniowej na płaszczyźnie, który był niezbędny w rozwiązaniu problemu, jest fakt po której stronie wektora leży punkt, a więc jeśli mamy punkty p, q, r należy policzyć wyznacznik macierzy w 3x3 gdzie w 1 i 2 kolumnie wpisujemy pod sobą kolejno współrzędne punktów p,q,r a ostatnia kolumna jest uzupełniona jedynkami. 
+
+Wyznacznik większy od zera oznacza, że punkt r leży po lewej stronie wektora p->q, równy zero oznacza, że punkty są współlinowe, a mniejszy od zera, że punkt r leży po prawej stronie wektora p->q
 
