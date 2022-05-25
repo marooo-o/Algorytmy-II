@@ -1,6 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <math.h>
+#include <fstream>
+#include <cstdlib>
+
 
 using namespace std;
 
@@ -130,16 +133,22 @@ vector<Point> convexHull(vector<Point> ar){
 }
 
 
-void loadDate(vector<vector<Point>> &quartersOfTheKingdom){
+void loadDate(vector<vector<Point>> &quartersOfTheKingdom, char path[]){
    
+    
     int n; //ilość ćwiartek
     vector<int> m; //ilość punktów w każdej ćwiartce
+    FILE *file;
+
+    file = fopen(path, "r");
+        
+    fscanf(file, "%d", &n); //wczytujemy ilość ćwiartek
     
-    cin>>n;
+
     m.resize(n);
     //wczytujemy ilość puntków w każdej ćwiartce
     for(int i=0; i<n; i++){
-        cin>>m[i];
+        fscanf(file,"%d", &m[i]);
     }
     
     quartersOfTheKingdom.resize(n);
@@ -149,14 +158,19 @@ void loadDate(vector<vector<Point>> &quartersOfTheKingdom){
     Point loadPoint;
     for(int i=0; i<n; i++){
         for(int j=0; j<m[i]; j++){
-            cin>>loadPoint;
-            quartersOfTheKingdom[i].push_back(loadPoint);
+          
+            Point p;
+            fscanf(file, "%d %d", &p.x, &p.y);
+            
+            quartersOfTheKingdom[i].push_back(p);
         }
     }
+    
+    fclose(file);
 }
 
-vector<vector<Point>> findBordersOfQuatersOfTheKingdom(vector<vector<Point>> &quartersOfTheKingdom){
-    vector<vector<Point>> bordersOfQuatersOfTheKingdom;
+void findBordersOfQuatersOfTheKingdom(vector<vector<Point>> &quartersOfTheKingdom, vector<vector<Point>> &bordersOfQuatersOfTheKingdom){
+    
     
     bordersOfQuatersOfTheKingdom.resize(quartersOfTheKingdom.size());
     
@@ -164,7 +178,7 @@ vector<vector<Point>> findBordersOfQuatersOfTheKingdom(vector<vector<Point>> &qu
         bordersOfQuatersOfTheKingdom[i] = convexHull(quartersOfTheKingdom[i]);
     }
     
-    return bordersOfQuatersOfTheKingdom;
+   
 }
 
 
@@ -245,9 +259,16 @@ vector<Point>belongingToAConvexPolygon(vector<Point> points, vector<Point> conve
         }
         
     }
-
-
+    
     return pointsInConvexPolygon;
+}
+
+void assignFieldsToQuarter(vector<vector<Point>> bordersOfQuatersOfTheKingdom, vector<Point> fields, vector<vector<Point>> &divisionOfTheKingdom){
+        
+    for(int i=0; i<bordersOfQuatersOfTheKingdom.size(); i++){
+        divisionOfTheKingdom.push_back(belongingToAConvexPolygon(fields, bordersOfQuatersOfTheKingdom[i]));
+    }
+    
 }
 
 
@@ -255,32 +276,45 @@ vector<Point>belongingToAConvexPolygon(vector<Point> points, vector<Point> conve
 int main(){
     
 
+    vector<vector<Point>> quartersOfTheKingdom;
+    vector<vector<Point>> bordersOfQuatersOfTheKingdom;
+    vector<Point> fields;
+    vector<vector<Point>> divisionOfTheKingdom;
     
-    vector<Point> points;
-    vector<Point> polygon;
-    
-    polygon.push_back(Point(0,0));
-    polygon.push_back(Point(5,0));
-    polygon.push_back(Point(5,5));
-    polygon.push_back(Point(0,7));
-    
+    fields.push_back(Point(15, 6));
+    fields.push_back(Point(15, 4));
     
    
-    points.push_back(Point(0,5));
-    points.push_back(Point(-3,7));
-    points.push_back(Point(2,5));
-    points.push_back(Point(2,0));
-    points.push_back(Point(2,1));
-    points.push_back(Point(0,0));
-    points.push_back(Point(0,1));
-    points.push_back(Point(1,1));
+    
+    fields.push_back(Point(10, 10));
+    fields.push_back(Point(-10, 1));
+    fields.push_back(Point(-10, 8));
+    fields.push_back(Point(-8, 10));
+    fields.push_back(Point(-2, 8));
+    
+    char path[] = "/Users/oliviersokolowski/Desktop/algorytmy/input.txt";
 
-
-    vector<Point> pointsInConvexPolygon = belongingToAConvexPolygon(points, polygon);
-
-    for(int i=0; i<pointsInConvexPolygon.size(); i++){
-        cout<<pointsInConvexPolygon[i];
+    loadDate(quartersOfTheKingdom, path);
+    
+    findBordersOfQuatersOfTheKingdom(quartersOfTheKingdom, bordersOfQuatersOfTheKingdom);
+    assignFieldsToQuarter(bordersOfQuatersOfTheKingdom, fields, divisionOfTheKingdom);
+    
+    cout<<"otoczka wypukła"<<endl;
+    for(int i = 0; i< bordersOfQuatersOfTheKingdom.size(); i++){
+        cout<<"otoczka nr: "<<i<<endl;
+        for(int j=0; j< bordersOfQuatersOfTheKingdom[i].size(); j++){
+            cout<<bordersOfQuatersOfTheKingdom[i][j];
+        }
     }
+    
+//    cout<<"pola wewnątrz"<<endl;
+//    for(int i = 0; i< divisionOfTheKingdom.size(); i++){
+//        for(int j=0; j< divisionOfTheKingdom[i].size(); j++){
+//            cout<<divisionOfTheKingdom[i][j];
+//        }
+//    }
+
+    
 
    
    
