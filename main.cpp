@@ -98,6 +98,7 @@ bool smaller(Point x, Point y){
     return x < y;
 }
 
+
 double vectorLength(Point A, Point B)
 {
     return sqrt(pow(A.x - B.x, 2)+pow(A.y - B.y, 2));
@@ -133,22 +134,33 @@ vector<Point> convexHull(vector<Point> ar){
 }
 
 
-void loadDate(vector<vector<Point>> &quartersOfTheKingdom, char path[]){
+void loadDate(vector<vector<Point>> &quartersOfTheKingdom, char path1[], vector<Point> &fields, char path2[]){
    
     
     int n; //ilość ćwiartek
+    int f; //ilość pól
     vector<int> m; //ilość punktów w każdej ćwiartce
-    FILE *file;
+    FILE *file1, *file2;
+    fields.clear();
 
-    file = fopen(path, "r");
+    file1 = fopen(path1, "r");
+    file2 = fopen(path2, "r");
         
-    fscanf(file, "%d", &n); //wczytujemy ilość ćwiartek
+    fscanf(file1, "%d", &n); //wczytujemy ilość ćwiartek
+    fscanf(file2, "%d", &f); //wczytujemy ilość pól
+    
+//    fields.resize(f);
+    for(int i=0; i<f; i++){
+        Point p;
+        fscanf(file2, "%d %d", &p.x, &p.y);
+        fields.push_back(p);
+    }
     
 
     m.resize(n);
     //wczytujemy ilość puntków w każdej ćwiartce
     for(int i=0; i<n; i++){
-        fscanf(file,"%d", &m[i]);
+        fscanf(file1,"%d", &m[i]);
     }
     
     quartersOfTheKingdom.resize(n);
@@ -160,13 +172,14 @@ void loadDate(vector<vector<Point>> &quartersOfTheKingdom, char path[]){
         for(int j=0; j<m[i]; j++){
           
             Point p;
-            fscanf(file, "%d %d", &p.x, &p.y);
+            fscanf(file1, "%d %d", &p.x, &p.y);
             
             quartersOfTheKingdom[i].push_back(p);
         }
     }
     
-    fclose(file);
+    fclose(file1);
+    fclose(file2);
 }
 
 void findBordersOfQuatersOfTheKingdom(vector<vector<Point>> &quartersOfTheKingdom, vector<vector<Point>> &bordersOfQuatersOfTheKingdom){
@@ -181,38 +194,6 @@ void findBordersOfQuatersOfTheKingdom(vector<vector<Point>> &quartersOfTheKingdo
    
 }
 
-
-//sprawdzanie czy punkt q leży na odciku p r
-bool onStraightaway(Point p, Point q, Point r){
-    if(q.x >= min(p.x, r.x) && q.x <= max(p.x, r.x) && q.y >= min(p.y, r.y) && q.y<=max(p.y, r.y))
-       return true;
-       return false;
-}
-
-bool checkThatTheSegmentsIntersect(Point p, Point q, Point r, Point s){
-    
-    int d1 = det(p, q, r);
-    int d2 = det(p, q, s);
-    int d3 = det(r, s, p);
-    int d4 = det(r, s, q);
-    
-  
-  
-    
-    //punkty p, q, r są współliniowe i r leży na odciku pq
-    if(d1 == 0 && onStraightaway(p,r,q)) return true;
-    
-    //punkty r, s, q są współliniowe i q leży na odniku rs
-    if(d4 == 0 && onStraightaway(r, q, s)) return true;
-    
-    
-    
-    //przypadek podstawowy, czyli p i q leżą po przeciwnych stronach odcinka rs, a punkty r i s leżą po przeciwnych stronach pq
-    if(d1 != d2 && d3 != d4) return true;
-    
-    
-    return false;
-}
 
 //punkty muszą być podane przeciwnie do wskazówek zegara
 vector<Point>belongingToAConvexPolygon(vector<Point> points, vector<Point> convexPolygon){
@@ -280,49 +261,29 @@ int main(){
     vector<vector<Point>> bordersOfQuatersOfTheKingdom;
     vector<Point> fields;
     vector<vector<Point>> divisionOfTheKingdom;
-    
-    fields.push_back(Point(15, 6));
-    fields.push_back(Point(15, 4));
-    
-   
-    
-    fields.push_back(Point(10, 10));
-    fields.push_back(Point(-10, 1));
-    fields.push_back(Point(-10, 8));
-    fields.push_back(Point(-8, 10));
-    fields.push_back(Point(-2, 8));
-    
+        
     char path[] = "/Users/oliviersokolowski/Desktop/algorytmy/input.txt";
+    char path2[] = "/Users/oliviersokolowski/Desktop/algorytmy/fields.txt";
 
-    loadDate(quartersOfTheKingdom, path);
-    
+    loadDate(quartersOfTheKingdom, path, fields,path2);
     findBordersOfQuatersOfTheKingdom(quartersOfTheKingdom, bordersOfQuatersOfTheKingdom);
     assignFieldsToQuarter(bordersOfQuatersOfTheKingdom, fields, divisionOfTheKingdom);
     
-    cout<<"otoczka wypukła"<<endl;
+
     for(int i = 0; i< bordersOfQuatersOfTheKingdom.size(); i++){
-        cout<<"otoczka nr: "<<i<<endl;
+        cout<<"granice cwiartki nr: "<<i+1<<endl;
         for(int j=0; j< bordersOfQuatersOfTheKingdom[i].size(); j++){
             cout<<bordersOfQuatersOfTheKingdom[i][j];
         }
+        cout<<"pola wewnątrz cwiartki nr : "<<i+1<<endl;
+        for(int j=0; j< divisionOfTheKingdom[i].size(); j++){
+            cout<<divisionOfTheKingdom[i][j];
+        }
+        cout<<endl;
     }
     
-//    cout<<"pola wewnątrz"<<endl;
-//    for(int i = 0; i< divisionOfTheKingdom.size(); i++){
-//        for(int j=0; j< divisionOfTheKingdom[i].size(); j++){
-//            cout<<divisionOfTheKingdom[i][j];
-//        }
-//    }
+    
+  
 
-    
-
-   
-   
-    
-    
-    
-
-    
-    
     return 0;
 }
