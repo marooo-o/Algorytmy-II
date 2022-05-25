@@ -134,7 +134,7 @@ vector<Point> convexHull(vector<Point> ar){
 }
 
 
-void loadDate(vector<vector<Point>> &quartersOfTheKingdom, char path1[], vector<Point> &fields, char path2[]){
+void loadDate(vector<vector<Point> > &quartersOfTheKingdom, char path1[], vector<Point> &fields, char path2[]){
    
     
     int n; //ilość ćwiartek
@@ -182,7 +182,7 @@ void loadDate(vector<vector<Point>> &quartersOfTheKingdom, char path1[], vector<
     fclose(file2);
 }
 
-void findBordersOfQuatersOfTheKingdom(vector<vector<Point>> &quartersOfTheKingdom, vector<vector<Point>> &bordersOfQuatersOfTheKingdom){
+void findBordersOfQuatersOfTheKingdom(vector<vector<Point> > &quartersOfTheKingdom, vector<vector<Point> > &bordersOfQuatersOfTheKingdom){
     
     
     bordersOfQuatersOfTheKingdom.resize(quartersOfTheKingdom.size());
@@ -244,7 +244,7 @@ vector<Point>belongingToAConvexPolygon(vector<Point> points, vector<Point> conve
     return pointsInConvexPolygon;
 }
 
-void assignFieldsToQuarter(vector<vector<Point>> bordersOfQuatersOfTheKingdom, vector<Point> fields, vector<vector<Point>> &divisionOfTheKingdom){
+void assignFieldsToQuarter(vector<vector<Point> > bordersOfQuatersOfTheKingdom, vector<Point> fields, vector<vector<Point> > &divisionOfTheKingdom){
         
     for(int i=0; i<bordersOfQuatersOfTheKingdom.size(); i++){
         divisionOfTheKingdom.push_back(belongingToAConvexPolygon(fields, bordersOfQuatersOfTheKingdom[i]));
@@ -257,12 +257,12 @@ void assignFieldsToQuarter(vector<vector<Point>> bordersOfQuatersOfTheKingdom, v
 int main(){
     
 
-    vector<vector<Point>> quartersOfTheKingdom;
-    vector<vector<Point>> bordersOfQuatersOfTheKingdom;
+    vector<vector<Point> > quartersOfTheKingdom;
+    vector<vector<Point> > bordersOfQuatersOfTheKingdom;
     vector<Point> fields;
-    vector<vector<Point>> divisionOfTheKingdom;
+    vector<vector<Point> > divisionOfTheKingdom;
         
-    char path[] = "/Users/oliviersokolowski/Desktop/algorytmy/input.txt";
+    char path[] = "input.txt";
     char path2[] = "/Users/oliviersokolowski/Desktop/algorytmy/fields.txt";
 
     loadDate(quartersOfTheKingdom, path, fields,path2);
