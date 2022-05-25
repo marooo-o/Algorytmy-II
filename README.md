@@ -41,18 +41,20 @@ Olivier Sokołowski
 
 Adam Rudlicki
 
-- projektowanie wejscia dla algorytmu minimalnego koszty
+- projektowanie wejscia dla algorytmu minimalnego kosztu
 - wczytywanie danych z pliku
 - algorytm najtańszej śieżki
 - max flow min cost
+
+
 
 ##Paragraf I
 
 *OBSŁUGA*
 
     -Wejście wklejamy do pliku input.txt
-    -Uruchamiamy main.exe
-    -Wynik programu pojawi się w pliku output.txt
+    -Uruchamiamy a.exe
+    -Wynik programu zostanie wyświetlony w terminalu
 
 *INPUT*
 
@@ -120,6 +122,6 @@ Out:
     Po zaaplikowaniu dowolnego algorytmu maksymalnego przepływu na tak skonstruowanym grafie dostajemy odpowiedź.
 
     Powyższy graf zostanie przekształcony w graf przepływowy o następującym kształcie:
-![](https://i.imgur.com/QlSqmJa.png)
+![](https://i.imgur.com/86bkVAI.png)
 
     Kod stosuje algorytm Forda-Fulkersona lub algorytm push-relabel by znaleźć odpowiedź.
