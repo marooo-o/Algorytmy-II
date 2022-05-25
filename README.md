@@ -122,6 +122,9 @@ pola wewnątrz cwiartki nr : 2
 
 Dobrze została jeszcze kwestia przecinania odcinka i półprostej, półprosta w rozwiązaniu jest reprezentowana jako odcinek, wybieramy najdalej wysunięty na prawo x i do niego dodajemy dużą wartość, a y jest taki sam jak sprawdzanego punktu. A więc dwa odcinki p-q i r-s przecinają się gdy p i q leżą po przeciwnych stronach prostej r-s, a punkty r i s po przeciwnych stronach prostej p-q także det(p,q,r) różny od det(p, q, s) oraz det(r,s,p) różny od(det r,s,q). 
    
-
+ ---------------------------------------------------------
+ ### Uwagi
+ 
+ Ćwiartki należy podawać tak aby były rozłączne, pola, które nie należą do żadnej ćwiartki są pomijane, pola leżące na granicach ćwiartek również. 
 
 
