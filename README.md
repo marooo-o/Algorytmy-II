@@ -1,77 +1,69 @@
 # Algorytmy-II
 **Projekt na przedmiot Algorytny II**
 
-##Paragraf I
+## Paragraf III
 
-*OBSŁUGA*
+### *OBSŁUGA*
 
-    -Wejście wklejamy do pliku input.txt
-    -Uruchamiamy main.exe
-    -Wynik programu pojawi się w pliku output.txt
+    -Punkty graniczne każdej ćwiartki zebrane na polecenie Samwise umieszczamy w pliku input.txt
+    -Współrzędne pól w królestwie umieszczamy w piliku fields.txt
+    -Kompilujemy program przy pomocy polecenia g++ main.cpp
+    -Uruchamiamy propram wpisując w konsole ./a.out
+    -Otrzymujemy w konsoli granice każdej ćwiartki oraz pól przynależących do niej
+    
+ ---------------------------------------------------------
 
-*INPUT I OUTPUT*
+### *INPUT*
 
-    Założona jest poprawność wejścia
-    W pierwszym wierszu mamy podane p, b, k, d (0 <= p, b, k, d, s) oznaczające kolejno liczbę pól, browarów, karczm, dróg, skrzyżowań.
-    Każda kategoria jest numerowana od 1 do ilosci obiektów.
-    Kolejne p wierszy oznacza liczbę produkcji zboża kolejnych pól.
-    Następne b wierszy oznacza moce przerobowe kolejnych browarów.
-    Ostatnie d wierszy jest formatu (pp, pz, ob1, ob2, id1, id2) oznaczające kolejno:
-    maksymalną przepustowość piwa, maksymalną przepustowość zboża, kategorię obiektu pierwszego, kategorię obiektu drugiego,
-    id obiektu pierwszego, id obiektu drugiego. (0 <= pp, pz) (ob1, ob2 = {p, b, k, d, s}) (0 < id1 < ob1, 0 < id2 < ob2)
- 
-*PRZYKŁAD*
+W pierwszej linijce pliku input.txt umieszczamy ilość ćwiartek w naszym królestwie, następnie dla każdej ćwiartki trzeba podać ilość punktów granicznych, następnie podajemy punkty graniczne każdej z ćwiartek, w kolejności w jakiej podawaliśmy ilość punktów granicznych.
+Następnie w pliku fields na samej górze podajemy ilość pól w całym pliku, następnie umieszczamy po prostu punkty w dowolnej kolejności, które zostaną przydzielone do odpowiednich ćwiartek. 
+
+ ---------------------------------------------------------
+### *PRZYKŁAD*
 
 ```
 Input:
-2 1 3 7 1
+ 2 <------- ilość ćwiartek królestwa
+ 8 <------- ilość punktów granicznych w pierwszej ćwiartce
+ 9 <------- ilość punktów granicznych w drugiej ćwiartce
+-2 8 <----- punkty pierwszej ćwiartki
+2 6
+6 4
+8 4
+8 6
+6 8
+4 10
+0 10
+-6 2 <------ punkty drugiej ćwiartki
+-4 1
+-2 4
+-2 6
+-4 8
+-6 8
+-8 8
+-8 6
+-8 4
+
+Fields: 
 10
-2
-4
-0 0 p p 1 2
-1 2 p b 1 1
-3 5 b p 1 2
-2 0 b s 1 1
-1 0 s k 1 2
-0 1 s k 1 3
-1 1 k s 1 1
+0 8
+2 8
+4 8
+4 6
+6 6
+-6 6
+-3 6
+-6 4
+-4 4
+-4 2
 
-Out:
-2
-```
-
-![](https://i.imgur.com/MPVHWMj.png)
-
-
-##Paragraf III
-
-
-Aby wczytać dane o ćwiartkach królestwa podejemy kolejno
-
-n - ilość ćwiartek królestwa, 
-m - wczytujemy n razy ilość punktów granicznych w każdej ćwiartce
-
-następnie wczytujemy punkty każdej ćwiartki
-
-*PRZYKŁAD*
 
 ```
-Input:
-2
-8
-6
-0 3
-1 1
-2 2
-4 4
-0 0
-1 2
-3 1
-3 3
-0 0
-0 4
--4 0
-5 0
-0 -6
-1 0
-```
+ ---------------------------------------------------------
+ ### *Pole 1*
+![pole 3](https://user-images.githubusercontent.com/82097861/170314182-bb0b2a8f-8cfe-41a2-b3ca-998608a47bb8.png)
+
+### *Pole 2*
+![pole 2 -p](https://user-images.githubusercontent.com/82097861/170314641-ac1cc41c-d978-4a79-9c19-b1d17206c715.png)
+
+
