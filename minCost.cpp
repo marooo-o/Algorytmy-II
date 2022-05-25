@@ -1,15 +1,12 @@
-#include<iostream>
-#include<climits>
-#include<vector>
+#include "minCostFlow.h"
 using namespace std;
 
-int graphSize, minCost = 0, addCost, minusCost;
+int graphSize, minCostValue = 0, addCost, minusCost;
 vector<bool> found;
 vector<int> dist, d;
-vector<vector<int>> cap, cost;
 vector<vector<bool>> visited;
 
-int miniDist(vector<int> dist, vector<bool> found) // finding minimum distance
+int minCostFlow::miniDist(vector<int> dist, vector<bool> found) // finding minimum distance
 {
     int minimum=INT_MAX,ind;
 
@@ -22,7 +19,7 @@ int miniDist(vector<int> dist, vector<bool> found) // finding minimum distance
     return ind;
 }
 
-void DijkstraAlgo(vector<vector<int>> cost, int src, bool print) // adjacency matrix
+void minCostFlow::DijkstraAlgo(vector<vector<int>> cost, int src, bool print) // adjacency matrix
 {
     //int dist[graphSize]; // // array to calculate the minimum distance for each node
     //bool found[graphSize];// boolean array to mark visited and unvisited for each node
@@ -83,14 +80,14 @@ void DijkstraAlgo(vector<vector<int>> cost, int src, bool print) // adjacency ma
         current = d[current];
     }
 
-    minCost += addCost;
-    cout << "cost: " << minCost << "; addCost: " << addCost << endl;
+    minCostValue += addCost;
+    cout << "cost: " << minCostValue << "; addCost: " << addCost << endl;
 }
 
-int main()
+int minCostFlow::minCost(vector<vector<int>> cap, vector<vector<int>> cost)
 {
 			//0   1   2   3   4   5   6   7
-    cap = { { 0,  4,  4,  0,  0,  0,  0,  0 },
+    /*cap = { { 0,  4,  4,  0,  0,  0,  0,  0 },
             { 0,  0,  0,  5,  6,  0,  0,  0 },
             { 0,  0,  0,  5,  0,  0,  0,  0 },
             { 0,  0,  0,  0,  0,  5,  2,  0 },
@@ -108,7 +105,7 @@ int main()
             { 0,  0,  0,  0,  0,  0,  0,  4 },
             { 0,  0,  0,  0,  0,  0,  0,  1 },
             { 0,  0,  0,  0,  0,  0,  0,  0 }};
-
+    */
     graphSize = cost.size();
     d = vector<int> (graphSize);
     found = vector<bool> (graphSize, 0);
@@ -148,10 +145,10 @@ int main()
             break;
         }/* else {
             cout << "HERE" << endl;
-            minCost -= minusCost;
+            minCostValue -= minusCost;
         }*/
     }
 
-    cout << "MIN COST: " << minCost << endl;
+    cout << "MIN COST: " << minCostValue << endl;
     return 0;
 }

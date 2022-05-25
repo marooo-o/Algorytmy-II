@@ -1,11 +1,9 @@
 //http://www.algorytm.org/algorytmy-grafowe/algorytm-forda-bellmana.html
-#include <iostream>
-#include <fstream>
-#include <string>
+#include "minCostFlow.h"
 
 using namespace std;
 
-int main()
+void minCostFlow::readInput()
 {
     int tmp;
     int fieldNum, breweryNum, innNum, crossNum, roadNum;
@@ -16,7 +14,9 @@ int main()
     in >> fieldNum >> breweryNum >> innNum >> crossNum >> roadNum;
     maks = fieldNum + breweryNum + crossNum + innNum+2;
 
-    int fieldProduction[fieldNum], innCapacity[innNum], flowMatrix[maks][maks], costMatrix[maks][maks];
+    int fieldProduction[fieldNum], innCapacity[innNum];
+    vector<vector<int>> flowMatrix(maks, vector<int>(maks));
+    vector<vector<int>> costMatrix(maks, vector<int>(maks));
     for(int i = 0; i<maks; i++) {
         for(int j=0; j<maks; j++) {
             flowMatrix[i][j] = 0;
@@ -80,33 +80,43 @@ int main()
 
     for(int i = 0; i<fieldNum; i++) {
         flowMatrix[0][i+1] = fieldProduction[i];
+        costMatrix[0][i+1] = 1;
     }
 
     for(int i = 0; i<innNum; i++) {
         flowMatrix[maks-(innNum+1)+i][maks-1] = innCapacity[i];
+        costMatrix[maks-(innNum+1)+i][maks-1] = 1;
     }
 
     for(int i = 0; i<maks; i++) {
         for(int j=0; j<maks; j++) {
+            if(costMatrix[i][j] < 10) {
+                cout << " ";
+            }
             cout << costMatrix[i][j] << " ";
         }
         cout << endl;
     }
 
     cout << "\n------------------\n" << endl;
-    cout << "0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5\n" << endl;
+    cout << " 0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5\n" << endl;
     for(int i = 0; i<maks; i++) {
         for(int j=0; j<maks; j++) {
+            if(flowMatrix[i][j] < 10) {
+                cout << " ";
+            }
             cout << flowMatrix[i][j] << " ";
         }
-        cout << "  |" << i << endl;
+        cout << "\t|" << i << endl;
     }
 
-    cout << "\n\nwymiary: " << (sizeof(flowMatrix)/sizeof(*flowMatrix)) << " x " << (sizeof(flowMatrix[0])/sizeof(*flowMatrix[0])) << endl;
+    cout << "\n\nwymiary: " << flowMatrix.size() << " x " << flowMatrix[0].size() << endl;
     /*for(int i = 0; i<maks; i++) {
         for(int j=0; j<maks; j++) {
             if(costMatrix[i][j] == -1);
         }
     }*/
-    return 0;
+//    return 0;
+    this->cap  = flowMatrix;
+    this->cost = costMatrix;
 }

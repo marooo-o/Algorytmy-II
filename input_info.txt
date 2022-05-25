@@ -15,7 +15,7 @@ c4
 ...
 
 e razy linia postaci: w x y z, gdzie:
- - w jest postaci "p"l, "b"m lub "s"n (1 ≤ l ≤ a  ∧  1 ≤ m ≤ b  ∧  1 ≤ n ≤ d)
- - x jest postaci "b"m, "s"n lub "k"o (1 ≤ m ≤ b  ∧  1 ≤ n ≤ b  ∧  1 ≤ o ≤ c)
+ - w jest postaci "p"l, "b"m lub "s"n (1 ≤ l ≤ a  ∧  1 ≤ m ≤ b  ∧  1 ≤ n ≤ d) (p-pole, b-browar, s-skrzyżowanie)
+ - x jest postaci "b"m, "s"n lub "k"o (1 ≤ m ≤ b  ∧  1 ≤ n ≤ b  ∧  1 ≤ o ≤ c) (b-browar, s-skrzyżowanie, k-karczma)
  - y maksymalny przepływ na drodze w x
  - z koszt transportu na drodze w x
