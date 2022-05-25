@@ -404,12 +404,17 @@ void test() {
                 graph g1 = w.to_graph(), g2 = w.to_graph();
                 int res_ford = g1.ford_fulkerson(), res_pr = g2.push_relabel();
                 if (res_ford != res_pr) {
-                        cout << "test number " << loop << ": WRONG " << res_ford << " " << res_pr << endl;
+                        cout << "test #" << loop << ": NIEPRAWIDLOWY, " << res_ford << " " << res_pr << endl;
                         w.print();
                         exit(0);
                 } else {
-                        cout << "test number " << loop << ": CORRECT, " << res_ford << " = " << res_pr << endl;
+                        cout << "test #" << loop << ": POPRAWNY, " << res_ford << " = " << res_pr << endl;
                         //w.print();
+                        //exit(0);
+                }
+                //zakomentować if'a, jeśli chcemy nieskonczenie wiele testow
+                if(loop==100){
+                        exit(0);
                 }
         }
 }
@@ -420,15 +425,19 @@ int main() {
         #ifdef TEST
         test(); //przeprowadzanie testow (powinno byc CORRECT)
         #endif
-        int n_objects, n_roads, fields_produce;
+        int n_objects=-1, n_roads=-1, fields_produce=-1;
         //cin >> n_objects >> n_roads >> fields_produce;
         cout << "Program liczacy maksymalny przeplyw piwa" << endl;
         cout << "ktory mozna dostarczyc za pomoca drog z browarow do karczm" << endl;
         cout << "biorac pod uwage wystepujace skrzyzowania" << endl;
         usleep(800000);usleep(800000);usleep(800000);usleep(800000);usleep(800000);
         system("cls");
-        ifstream IN("in2.txt");
+        ifstream IN("in.txt");
         IN >> n_objects >> n_roads >> fields_produce;
+        if((n_objects==-1) || (n_roads==-1) || (fields_produce==-1)){
+                cout<<"NIE UDALO SIE WCZYTAC PLIKU"<<endl;
+                cout<<"BADZ ZNAJDUJA SIE W NIM NIEPRAWIDLOWE DANE"<<endl;
+        }else{
         cout << "Wczytuje dane z pliku..." << endl; cout << "  [                    ]  0%" << endl; usleep(20000); system("cls");
         cout << "Wczytuje dane z pliku..." << endl; cout << "  [|                   ]  5%" << endl; usleep(20000); system("cls");
         cout << "Wczytuje dane z pliku..." << endl; cout << "  [||                  ]  10%" << endl; usleep(20000); system("cls");
@@ -457,13 +466,16 @@ int main() {
         // input
         for (int i = 1; i <= n_objects; ++i) {
                 char c;
+                field f;
+                brewery b;
+                intersection inter;
+                tavern t;
                 //cin >> c;
                 IN >> c;
                 //cout << c << " " << endl;
                 if (c == 'f') {
                         // nowy browar
                         // f [x pola] [y pola]
-                        field f;
                         f.id = i;
                         //cin >> f.p.x >> f.p.y;
                         IN >> f.p.x >> f.p.y;
@@ -472,7 +484,6 @@ int main() {
                 } else if (c == 'b') {
                         // nowy browar
                         // b [x browaru] [y browaru] [limit produkcji]
-                        brewery b;
                         b.id = i;
                         //cin >> b.p.x >> b.p.y >> b.limit;
                         IN >> b.p.x >> b.p.y >> b.limit;
@@ -481,7 +492,6 @@ int main() {
                 } else if (c == 'i') {
                         // nowe skrzyzowanie
                         // i [x skrzyzowania] [y skrzyzowania]
-                        intersection inter;
                         inter.id = i;
                         //cin >> inter.p.x >> inter.p.y;
                         IN >> inter.p.x >> inter.p.y;
@@ -490,7 +500,6 @@ int main() {
                 } else if (c == 't') {
                         // nowa karczma
                         // t [x karczmy] [y karczmy] [limit sprzedazy]
-                        tavern t;
                         t.id = i;
                         //cin >> t.p.x >> t.p.y >> t.sell_limit;
                         IN >> t.p.x >> t.p.y >> t.sell_limit;
@@ -500,8 +509,8 @@ int main() {
         }
 
         // wczytanie drog
+        road r;
         for (int i = 0; i < n_roads; ++i) {
-                road r;
                 // [id obiektu 1] [id obiektu 2] [limit przewozu jeczmiena] [limit przewozu piwa]
                 //cin >> r.u >> r.v >> r.barley_capacity >> r.beer_capacity;
                 IN >> r.u >> r.v >> r.barley_capacity >> r.beer_capacity;
@@ -511,9 +520,11 @@ int main() {
 
         graph g = w.to_graph();
         int flow = g.push_relabel();
-        // assert(w.to_graph().push_relabel() == flow);
-
+        int flow2 = g.ford_fulkerson();
+        if(flow==flow2){
         cout << endl << endl << "maksymalnych przeplyw z" << "danych znajdujacych sie w wejscu to: " << flow << endl;
+        }
+        }
         IN.close();
         return 0;
 }
