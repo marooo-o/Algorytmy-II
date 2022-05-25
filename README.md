@@ -100,7 +100,8 @@ pola wewnątrz cwiartki nr : 2
 -4 2
 
  ```
- 
+  ---------------------------------------------------------
+  
  ### *Dowód*
 
 Opisany problem podziału królestwa można rozwiązać reprezentująć ćwiartki jako rozłączne wielokąty wypukłe, a pola jako punkty które leżą w ich wnętrzu. 
@@ -110,4 +111,12 @@ Problem można przedstawić jako poszukiwanie otoczki wypukłej oraz przynależe
 Podstawowym faktem z geometrii obliczeniowej na płaszczyźnie, który był niezbędny w rozwiązaniu problemu, jest fakt po której stronie wektora leży punkt, a więc jeśli mamy punkty p, q, r należy policzyć wyznacznik macierzy w 3x3 gdzie w 1 i 2 kolumnie wpisujemy pod sobą kolejno współrzędne punktów p,q,r a ostatnia kolumna jest uzupełniona jedynkami. 
 
 Wyznacznik większy od zera oznacza, że punkt r leży po lewej stronie wektora p->q, równy zero oznacza, że punkty są współlinowe, a mniejszy od zera, że punkt r leży po prawej stronie wektora p->q
+
+w celu określenia przynależności pola do ćwiartki został wykorzystany problem przynależności puntku do wielokąta wypukłego, założone zostało, że punkty leżące na granicy ćwiartki do niej NIE należą. Wykorzystany w rozwiązaniu algorytm polega, na wyznaczeniu półprostej o początku w sprawdzanym punkcie, oraz sprawdzaniu ile razy ta półprosta przecina boki wielokąta. Jeśli przecina parzystą ilość razy punkt leży na zewnątrz, w przeciwnym wypadku wewnątrz, dzięki wypukłości wielokąt, możliwe było uniknięcie wielu problemów z przynależnością punktu, jednym który pozotał był przypadek gdy półprosta przecinała złączenie dwóch boków wielokąta
+
+![Zrzut ekranu 2022-05-25 o 19 49 22](https://user-images.githubusercontent.com/82097861/170329929-d0512a92-9c94-4999-b1b9-c47098822cf8.png)
+
+
+
+
 
