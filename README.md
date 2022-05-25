@@ -110,15 +110,15 @@ pola wewnątrz cwiartki nr : 2
 
    Wyznacznik większy od zera oznacza, że punkt r leży po lewej stronie wektora p->q, równy zero oznacza, że punkty są współlinowe, a mniejszy od zera, że punkt r leży po prawej stronie wektora p->q
 
-   w celu określenia przynależności pola do ćwiartki został wykorzystany problem przynależności puntku do wielokąta wypukłego, założone zostało, że punkty leżące na granicy ćwiartki do niej NIE należą. Wykorzystany w rozwiązaniu algorytm polega, na wyznaczeniu półprostej o początku w sprawdzanym punkcie, oraz sprawdzaniu ile razy ta półprosta przecina boki wielokąta. Jeśli przecina parzystą ilość razy punkt leży na zewnątrz, w przeciwnym wypadku wewnątrz, dzięki wypukłości wielokąt, możliwe było uniknięcie wielu problemów z przynależnością punktu, jednym który pozotał był przypadek gdy półprosta przecinała złączenie dwóch boków wielokąta
+   w celu określenia przynależności pola do ćwiartki został wykorzystany problem przynależności puntku do wielokąta wypukłego, założone zostało, że punkty leżące na granicy ćwiartki do niej NIE należą. Wykorzystany w rozwiązaniu algorytm polega, na wyznaczeniu półprostej o początku w sprawdzanym punkcie, oraz sprawdzaniu ile razy ta półprosta przecina boki wielokąta. Jeśli przecina parzystą ilość razy punkt leży na zewnątrz, w przeciwnym wypadku wewnątrz, dzięki wypukłości wielokąta, możliwe było uniknięcie wielu problemów z przynależnością punktu, jednym który pozotał był przypadek gdy półprosta przecinała złączenie dwóch boków wielokąta
 
 ![Zrzut ekranu 2022-05-25 o 19 49 22](https://user-images.githubusercontent.com/82097861/170329929-d0512a92-9c94-4999-b1b9-c47098822cf8.png)
 
-   Problem został rozwiązany zaliczając jedynie przecięcie w górnej części odcinka, aby unikąć podwójego zliczania, działa to poprzez wybieranie maksimum na y'kach z dwóch końców odcinka, dzięki takiemu udało się poradzić nawet z tak szczególnymi sytacjami jak widoczne na zdjęciu ponieżej. 
+   Problem został rozwiązany zaliczając jedynie przecięcie w górnej części odcinka, aby unikąć podwójego zliczania, działa to poprzez wybieranie maksimum na y z dwóch końców odcinka, dzięki takiemu udało się poradzić nawet z tak szczególnymi sytacjami jak widoczne na zdjęciu ponieżej. 
    
    ![Zrzut ekranu 2022-05-25 o 20 05 48](https://user-images.githubusercontent.com/82097861/170336560-47f5716a-e202-40f5-b5e0-04bc1ea0b431.png)
 
-Dobrze została jeszcze kwestia przecinania odcinka i półprostej, półprosta w rozwiązaniu jest reprezentowana jako odcinek, wybieramy najdalej wysunięty na prawo x i do niego dodajemy dużą wartość, a y jest taki sam jak sprawdzanego punktu. A więc dwa odcinki p-q i r-s przecinają się gdy p i q leżą po przeciwnych stronach prostej r-s, a punkty r i s po przeciwnych stronach prostej p-q także det(p,q,r) różny od det(p, q, s) oraz det(r,s,p) różny od(det r,s,q). 
+Została jeszcze kwestia przecinania odcinka i półprostej, półprosta w rozwiązaniu jest reprezentowana jako odcinek, wybieramy najdalej wysunięty na prawo x i do niego dodajemy dużą wartość, a y jest taki sam jak sprawdzanego punktu. A więc dwa odcinki p-q i r-s przecinają się gdy p i q leżą po przeciwnych stronach prostej r-s, a punkty r i s po przeciwnych stronach prostej p-q także det(p,q,r) różny od det(p, q, s) oraz det(r,s,p) różny od(det r,s,q). 
    
  ---------------------------------------------------------
  ### Uwagi
