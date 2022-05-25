@@ -9,7 +9,7 @@
     -Współrzędne pól w królestwie umieszczamy w piliku fields.txt
     -Kompilujemy program przy pomocy polecenia g++ main.cpp
     -Uruchamiamy propram wpisując w konsole ./a.out
-    -Otrzymujemy w konsoli granice każdej ćwiartki oraz pól przynależących do niej
+    -Otrzymujemy w konsoli granice każdej ćwiartki oraz pola przynależących do niej
     
  ---------------------------------------------------------
 
