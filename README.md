@@ -104,9 +104,7 @@ pola wewnątrz cwiartki nr : 2
   
  ### *Dowód*
 
-   Opisany problem podziału królestwa można rozwiązać reprezentująć ćwiartki jako rozłączne wielokąty wypukłe, a pola jako punkty które leżą w ich wnętrzu. 
-
-   Problem można przedstawić jako poszukiwanie otoczki wypukłej oraz przynależenia punktu do wielokąta w tym wypadku wypukłego. Spośród zbioru punktów granicznych każdej ćwiartki, które rozkazał zebrać Samwise, wybieramy podzbiór który tworzy najmniejszy wielokąt wypukły zawierający wszystkie punkty. W tym celu w rozwiązaniu został wykorzystany Algorytm Jarvisa, który polega na tym aby znaleźć punktu p0 o najmniejszej współrzędnej y, jeśli takich jest kilka, bierzemy ten o najmniejszej współrzędnej x. Następnie bierzemy punkt s dowolny, różny od p0 i powtarzamy dla punktów, które nie są jeszcze w otoczce. Jeśli punkt pi leży na prawo od wektora p0s weź go jako s i powtarzamy aż znajdziemy całą otoczkę. 
+   Problem podziału królestwa  można przedstawić jako poszukiwanie otoczki wypukłej, a przynależność do niej pól jako przynależność punktu do wielokąta, w tym wypadku wypukłego. Spośród zbioru punktów granicznych każdej ćwiartki, które rozkazał zebrać Samwise, wybieramy podzbiór, który tworzy najmniejszy wielokąt wypukły zawierający wszystkie punkty. W tym celu w rozwiązaniu został wykorzystany Algorytm Jarvisa, który polega na tym, aby znaleźć punktu p0 o najmniejszej współrzędnej y, jeśli takich jest kilka, bierzemy ten o najmniejszej współrzędnej x. Następnie bierzemy punkt s dowolny, różny od p0 i sprawdzamy czy po prawej stronie wektora p0-s leży jakiś punkt, jeśli tak to bierzemy go za s i powtarzamy to dla punktów, które nie są jeszcze w otoczce. 
 
    Podstawowym faktem z geometrii obliczeniowej na płaszczyźnie, który był niezbędny w rozwiązaniu problemu, jest fakt po której stronie wektora leży punkt, a więc jeśli mamy punkty p, q, r należy policzyć wyznacznik macierzy w 3x3 gdzie w 1 i 2 kolumnie wpisujemy pod sobą kolejno współrzędne punktów p,q,r a ostatnia kolumna jest uzupełniona jedynkami. 
 
