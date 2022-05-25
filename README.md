@@ -116,7 +116,7 @@ w celu określenia przynależności pola do ćwiartki został wykorzystany probl
 
 ![Zrzut ekranu 2022-05-25 o 19 49 22](https://user-images.githubusercontent.com/82097861/170329929-d0512a92-9c94-4999-b1b9-c47098822cf8.png)
 
-
+problem został rozwiązany zaliczając jedynie przecięcie w górnej części odcinka, aby unikąć podwójego zliczania
 
 
 
