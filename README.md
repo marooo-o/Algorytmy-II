@@ -1,7 +1,7 @@
 # Algorytmy-II
 **Projekt na przedmiot Algorytny II**
 
-#*PODZIAŁ ZADAŃ*
+# *PODZIAŁ ZADAŃ*
 
 Jakub Hoderny
 
@@ -50,9 +50,9 @@ Adam Rudlicki
 
 
 
-##Paragraf I
+## Paragraf I
 
-####*OBSŁUGA*
+### *OBSŁUGA*
 
 - Wejście wklejamy do pliku input.txt
 - Uruchamiamy a.exe
@@ -60,7 +60,7 @@ Adam Rudlicki
 
 ---------------------------------------------------------
 
-####*INPUT*
+### *INPUT*
 
 W pierwszej linijce wejścia muszą znajdować się 3 oddzielone spacjami liczby: sumaryczna liczba obiektów (karczm, skrzyżowań, pól, browarów), liczba dróg, i liczba jęczmieńa jaką produkują pola.
     Niech n = liczba obiektów. Następne n linijek opisuje obiekty. Pierwszy znak oddzielony od reszty linijki spacją wyznacza rodzaj i-tego obiektu, gdzie i to numer linijki (od 1 do n).
@@ -76,7 +76,7 @@ Niech m = liczba dróg. Kolejne m linijek opisuje każdą z dróg. Opis składa 
 
 ---------------------------------------------------------
 
-####*PRZYKŁAD*
+### *PRZYKŁAD*
 
 ```
 Input:
@@ -101,7 +101,7 @@ Out:
 ![](https://i.imgur.com/HcW058Y.png)
 
 ---------------------------------------------------------
-####*TESTOWANIE*
+#### *TESTOWANIE*
 
 >By włączyć testowanie programu, należy skompilować go z flagą "-DTEST".
     Wykonanie go włączy sprawdzanie randomizowanych przykładów, dopóki program nie zostanie zakończony.
@@ -109,7 +109,7 @@ Out:
 ---------------------------------------------------------
 
 
-####*DOWÓD*
+### *DOWÓD*
 
 Opisany świat można reprezentować jako graf,
     którego wierzchołki to pola, browary, karczmy lub skrzyżowania, a krawędzie to ścieżki pomiędzy tymi wierzchołkami.
