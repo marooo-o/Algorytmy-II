@@ -20,7 +20,7 @@ int main()
     for(int i = 0; i<maks; i++) {
         for(int j=0; j<maks; j++) {
             flowMatrix[i][j] = 0;
-            costMatrix[i][j] = -1;
+            costMatrix[i][j] = 0;
         }
     }
 
@@ -77,16 +77,36 @@ int main()
         flowMatrix[x][y] = stoi(flow);
         costMatrix[x][y] = stoi(cost);
     }
+
+    for(int i = 0; i<fieldNum; i++) {
+        flowMatrix[0][i+1] = fieldProduction[i];
+    }
+
+    for(int i = 0; i<innNum; i++) {
+        flowMatrix[maks-(innNum+1)+i][maks-1] = innCapacity[i];
+    }
+
     for(int i = 0; i<maks; i++) {
         for(int j=0; j<maks; j++) {
             cout << costMatrix[i][j] << " ";
         }
         cout << endl;
     }
+
+    cout << "\n------------------\n" << endl;
+    cout << "0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5\n" << endl;
     for(int i = 0; i<maks; i++) {
+        for(int j=0; j<maks; j++) {
+            cout << flowMatrix[i][j] << " ";
+        }
+        cout << "  |" << i << endl;
+    }
+
+    cout << "\n\nwymiary: " << (sizeof(flowMatrix)/sizeof(*flowMatrix)) << " x " << (sizeof(flowMatrix[0])/sizeof(*flowMatrix[0])) << endl;
+    /*for(int i = 0; i<maks; i++) {
         for(int j=0; j<maks; j++) {
             if(costMatrix[i][j] == -1);
         }
-    }
+    }*/
     return 0;
 }
