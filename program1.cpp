@@ -1,3 +1,4 @@
+/*
 #include <iostream>
 #include <vector>
 #include <limits>
@@ -8,6 +9,8 @@
 #include <fstream>
 #include <chrono>
 #include <thread>
+*/
+#include <bits/stdc++.h>
 #include <unistd.h>
 
 using namespace std;
