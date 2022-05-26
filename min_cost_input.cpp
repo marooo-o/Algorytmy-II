@@ -1,8 +1,8 @@
-//http://www.algorytm.org/algorytmy-grafowe/algorytm-forda-bellmana.html
 #include "minCostFlow.h"
 
 using namespace std;
 
+//wczytywanie danych z pliku tekstowego o nazwie zapisanej w zmiennej string fileName
 void minCostFlow::readInput(string fileName)
 {
     int tmp;
@@ -35,6 +35,7 @@ void minCostFlow::readInput(string fileName)
         innCapacity[i] = tmp;
     }
 
+    //zmienianie znawy string wierzcho³ków na nazwe liczbowa i zapisywanie w macierzy sasiedztwa
     for (int i = 0; i < roadNum; i++)
     {
         int addX=0, addY=0;
@@ -78,6 +79,7 @@ void minCostFlow::readInput(string fileName)
         costMatrix[x][y] = stoi(cost);
     }
 
+    //tworzenie g³ownego zrodla i ujscia
     for(int i = 0; i<fieldNum; i++) {
         flowMatrix[0][i+1] = fieldProduction[i];
         costMatrix[0][i+1] = 1;

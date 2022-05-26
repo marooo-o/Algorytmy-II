@@ -6,7 +6,8 @@ vector<bool> found;
 vector<int> dist, d;
 vector<vector<bool>> visited;
 
-int minCostFlow::miniDist(vector<int> dist, vector<bool> found) // finding minimum distance
+// szukanie min dystansu
+int minCostFlow::miniDist(vector<int> dist, vector<bool> found)
 {
     int minimum=INT_MAX,ind;
 
@@ -19,27 +20,20 @@ int minCostFlow::miniDist(vector<int> dist, vector<bool> found) // finding minim
     return ind;
 }
 
-void minCostFlow::DijkstraAlgo(vector<vector<int>> cost, int src, bool print) // adjacency matrix
+void minCostFlow::DijkstraAlgo(vector<vector<int>> cost, int src, bool print)
 {
-    //int dist[graphSize]; // // array to calculate the minimum distance for each node
-    //bool found[graphSize];// boolean array to mark visited and unvisited for each node
     d.clear();
     found.assign(found.size(), false);
     dist.assign(dist.size(), INT_MAX);
 
     addCost = 0;
     minusCost = 0;
-    int current = cost.size()-1;
-    /*for(int k = 0; k<graphSize; k++) {
-        dist[k] = INT_MAX;
-        found[k] = false;
-    }*/
+    int current;
 
-    dist[src] = 0;   // Source vertex distance is set 0
+    dist[src] = 0;
 
     for(int k = 0; k<graphSize; k++) {
         int m=miniDist(dist,found);
-        //cout << "m: " << m << endl;
         found[m]=true;
         for(int k = 0; k<graphSize; k++) {
             // updating the distance of neighbouring vertex
@@ -51,19 +45,15 @@ void minCostFlow::DijkstraAlgo(vector<vector<int>> cost, int src, bool print) //
             }
         }
     }
-    /*cout<<"Vertex\tDistance from source vertex"<<endl;
-    for(int k = 0; k<graphSize; k++) {
-        //char str=65+k;
-        cout<<k<<"\t"<<dist[k]<<endl;
-    }*/
 
-///dodawanie kosztu tylko tych sciezek, ktorych jeszcze nie odwiedzielismy
+    //dodawanie kosztu tylko tych sciezek, ktorych jeszcze nie odwiedzilismy
+    current = cost.size()-1;
     while(current) {
         //cout << d[current] << "-" << current << " : " << cap[d[current]][current] << endl;
         if(!visited[d[current]][current]) {
             visited[d[current]][current] = true;
             addCost += cost[d[current]][current];
-//usuwanie nadmiarowego kosztu, chyba ze znajde sposob aby algorytm nie ignorowal sciezek o koszcie 0
+            //usuwanie nadmiarowego kosztu, chyba ze znajde sposob aby algorytm nie ignorowal sciezek o koszcie 0
             if(!d[current]) {
                 addCost--;
                 //minusCost++;
@@ -112,6 +102,9 @@ int minCostFlow::minCost(vector<vector<int>> cap, vector<vector<int>> cost)
     dist = vector<int> (graphSize);
     visited = vector<vector<bool>> (graphSize, vector<bool>(graphSize));
 
+    if(debuggMode) {
+        cout << "DEBUGG" << endl;
+    }
     //cout << "\n\n" << endl;
     while(1) {
         DijkstraAlgo(cost, 0, 0);
