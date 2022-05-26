@@ -45,7 +45,9 @@ struct road {
         int u, v;
         int barley_capacity, beer_capacity;
 };
-
+/**
+ *
+ */
 struct graph {
         int n, s, t; // zrodlo i ujscie
         vector < vector < int >> adj; // sasiedzi kazdego wierzcholka
@@ -57,7 +59,8 @@ struct graph {
         graph(size_t n, int s, int t): n(n), s(s), t(t), adj(n), cap(n, vector < int > (n)), parent(n),
                 height(n), excess(n), flow(n, vector < int > (n)) {}
 
-        int bfs() {
+
+                int bfs() {
                 // resetujemy tablice rodzicow
                 fill(parent.begin(), parent.end(), -1);
                 parent[s] = -2;
@@ -100,6 +103,10 @@ struct graph {
         }
 
         // ford-fulkerson
+        /**
+         * <p>funkcja stosujaca algorytm forda fulkersona do znalezienia maksymalnego przeplywu</p>
+         * @return maksymalny przeplyw
+         */
         int ford_fulkerson() {
                 int flow = 0, new_flow;
                 // szukana jest sciezka powiekszajaca
@@ -266,7 +273,11 @@ struct world {
                         cout << r.u << " " << r.v << " " << r.beer_capacity << " " << r.barley_capacity << endl;
                 }
         }
-
+/**
+ * <p>szuka maksymalnego przeplywu metoda brute force</p>
+ * @param flow_size
+ * @return maksymalny przeplyw
+ */
         int brute_force(int flow_size) {
                 vector < int > road_flows(2 * roads.size(), -flow_size);;
 
