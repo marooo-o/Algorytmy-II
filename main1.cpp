@@ -434,6 +434,7 @@ void test() {
 }
 
 int main() {
+    int h,u,j;
         system("cls");
         system("color a"); //zmiana koloru cmd
         #ifdef TEST
@@ -447,7 +448,7 @@ int main() {
         usleep(800000);usleep(800000);usleep(800000);usleep(800000);usleep(800000);
         system("cls");
         ifstream IN("in.txt");
-        IN >> n_objects >> n_roads >> fields_produce;
+        IN >> n_objects >> n_roads >> fields_produce >> h >> u >> j;
         if((n_objects==-1) || (n_roads==-1) || (fields_produce==-1)){
                 cout<<"NIE UDALO SIE WCZYTAC PLIKU"<<endl;
                 cout<<"BADZ ZNAJDUJA SIE W NIM NIEPRAWIDLOWE DANE"<<endl;
