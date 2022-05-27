@@ -5,8 +5,8 @@ int main() {
 
     minCostFlow mcf;
 
-    mcf.debuggMode = true;
-    mcf.readInput(fileName);
+    mcf.debuggMode = 1;
+    //mcf.readInput(fileName);
 
     mcf.minCost(mcf.cap, mcf.cost);
 

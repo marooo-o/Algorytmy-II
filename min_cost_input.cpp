@@ -35,7 +35,7 @@ void minCostFlow::readInput(string fileName)
         innCapacity[i] = tmp;
     }
 
-    //zmienianie znawy string wierzcho³ków na nazwe liczbowa i zapisywanie w macierzy sasiedztwa
+    //zmienianie znawy string wierzcholkow na nazwe liczbowa i zapisywanie w macierzy sasiedztwa
     for (int i = 0; i < roadNum; i++)
     {
         int addX=0, addY=0;
@@ -79,7 +79,7 @@ void minCostFlow::readInput(string fileName)
         costMatrix[x][y] = stoi(cost);
     }
 
-    //tworzenie g³ownego zrodla i ujscia
+    //tworzenie glownego zrodla i ujscia
     for(int i = 0; i<fieldNum; i++) {
         flowMatrix[0][i+1] = fieldProduction[i];
         costMatrix[0][i+1] = 1;
@@ -90,35 +90,35 @@ void minCostFlow::readInput(string fileName)
         costMatrix[maks-(innNum+1)+i][maks-1] = 1;
     }
 
-    for(int i = 0; i<maks; i++) {
-        for(int j=0; j<maks; j++) {
-            if(costMatrix[i][j] < 10) {
-                cout << " ";
+    if(debuggMode) {
+        for(int i = 0; i<maks; i++) {
+            for(int j=0; j<maks; j++) {
+                if(costMatrix[i][j] < 10) {
+                    cout << " ";
+                }
+                cout << costMatrix[i][j] << " ";
             }
-            cout << costMatrix[i][j] << " ";
+            cout << endl;
         }
-        cout << endl;
-    }
 
-    cout << "\n------------------\n" << endl;
-    cout << " 0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5\n" << endl;
-    for(int i = 0; i<maks; i++) {
-        for(int j=0; j<maks; j++) {
-            if(flowMatrix[i][j] < 10) {
-                cout << " ";
+        cout << "\n------------------\n" << endl;
+        cout << " ";
+        for(int i = 0; i<flowMatrix.size(); i++) {
+            cout << i << "  ";
+        }
+        cout << "\n" << endl;
+        for(int i = 0; i<maks; i++) {
+            for(int j=0; j<maks; j++) {
+                if(flowMatrix[i][j] < 10) {
+                    cout << " ";
+                }
+                cout << flowMatrix[i][j] << " ";
             }
-            cout << flowMatrix[i][j] << " ";
+            cout << "\t|" << i << endl;
         }
-        cout << "\t|" << i << endl;
-    }
 
-    cout << "\n\nwymiary: " << flowMatrix.size() << " x " << flowMatrix[0].size() << endl;
-    /*for(int i = 0; i<maks; i++) {
-        for(int j=0; j<maks; j++) {
-            if(costMatrix[i][j] == -1);
-        }
-    }*/
-//    return 0;
+        cout << "\n\nwymiary: " << flowMatrix.size() << " x " << flowMatrix[0].size() << endl;
+    }
     this->cap  = flowMatrix;
     this->cost = costMatrix;
 }

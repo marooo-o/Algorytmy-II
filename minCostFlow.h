@@ -8,7 +8,7 @@ using namespace std;
 
 class minCostFlow {
 public:
-    bool debuggMode = false;
+    bool debuggMode;
     vector<vector<int>> cap, cost;
     void readInput(string fileName);
     int miniDist(vector<int> dist, vector<bool> found);
