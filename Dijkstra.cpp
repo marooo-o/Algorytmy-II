@@ -2,7 +2,7 @@
 using namespace std;
 
 int graphSize, minCostValue = 0, addCost, minusCost;
-vector<int> dist1, d;
+vector<int> dist1, path;
 vector<vector<bool>> visited;
 bool visitedNewPath;
 vector<bool> found1;
@@ -21,9 +21,9 @@ int minCostFlow::searchGraphDijkstra(vector<int> dist, vector<bool> found)
     return ind;
 }
 
-void minCostFlow::getFlowDijkstra(vector<vector<int>> cost, int src, bool print)
+void minCostFlow::getFlowDijkstra(vector<vector<int>> cost, int src)
 {
-    d.clear();
+    path.clear();
     found1.assign(found1.size(), false);
     dist1.assign(dist1.size(), INT_MAX);
 
@@ -37,11 +37,10 @@ void minCostFlow::getFlowDijkstra(vector<vector<int>> cost, int src, bool print)
         int m=searchGraphDijkstra(dist1,found1);
         found1[m]=true;
         for(int k = 0; k<graphSize; k++) {
-            // updating the distance of neighbouring vertex
+            // uaktualnianie kosztu do sasiednich wierzcholkow
             if(!(found1[k]) && (cost[m][k]) && (dist1[m]!=INT_MAX) && (dist1[m]+cost[m][k]<dist1[k])) {
                 dist1[k]=dist1[m]+cost[m][k];
-                d[k]=m;
-                //cout << m << ", " << k << ", " << dist1[k] << " : " << dist1[m] << "\t\t" << cost[m][k] << endl;
+                path[k]=m;
             }
         }
     }
@@ -50,26 +49,17 @@ void minCostFlow::getFlowDijkstra(vector<vector<int>> cost, int src, bool print)
     current = cost.size()-1;
     visitedNewPath = false;
     while(current) {
-        //cout << d[current] << "-" << current << " : " << cap[d[current]][current] << endl;
-        if(!visited[d[current]][current]) {
-            visited[d[current]][current] = true;
+        if(!visited[path[current]][current]) {
+            visited[path[current]][current] = true;
             visitedNewPath = true;
         }
-            addCost += cost[d[current]][current];
-            //cout << "d: " << d[current] << ", " << current << endl;
-            //usuwanie nadmiarowego kosztu, chyba ze znajde sposob aby algorytm nie ignorowal sciezek o koszcie 0
-            /*if(d[current]== 0) {
-                addCost--;
-                //minusCost++;
-                //cout << "source" << endl;
-            }
-            if(current == cost.size()-1) {
-                addCost--;
-                //minusCost++;
-                //cout << "sink" << endl;
-            }*/
-        //}
-        current = d[current];
+        if(path[current]!= 0 && current != cost.size()-1) {
+            //addCost--;
+            addCost += cost[path[current]][current];
+        }
+        //addCost += cost[d[current]][current];
+        //usuwanie nadmiarowego kosztu, chyba ze znajde sposob aby algorytm nie ignorowal sciezek o koszcie 0
+        current = path[current];
     }
     if(visitedNewPath)
         minCostValue += addCost;
@@ -81,50 +71,17 @@ void minCostFlow::getFlowDijkstra(vector<vector<int>> cost, int src, bool print)
 
 int minCostFlow::minCostDijkstra(vector<vector<int>> cap, vector<vector<int>> cost)
 {
-			//0   1   2   3   4   5   6   7
-    /*cap = { {  0,   4,   4,  0,   0,   0,   0,   0 },
-
-            { -4,   0,   0,  5,   6,   0,   0,   0 },
-
-            { -4,   0,   0,  5,   0,   0,   0,   0 },
-
-            {  0,  -5,  -5,  0,   0,   5,   2,   0 },
-
-            {  0,  -6,   0,  0,   0,   0,   5,   0 },
-
-            {  0,   0,   0, -5,   0,   0,   0,   5 },
-
-            {  0,   0,   0, -2,  -5,   0,   0,   2 },
-
-            {  0,   0,   0,  0,   0,  -5,  -2,   0 }};
-
-            // 0    1    2    3    4    5    6    7    8
-    cost = {{  0,   2,   3,   0,   0,   0,   0,   0 },
-
-            { -2,   0,   0,   2,   5,   0,   0,   0 },
-
-            { -3,   0,   0,   3,   0,   0,   0,   0 },
-
-            {  0,  -2,  -3,   0,   0,   2,   4,   0 },
-
-            {  0,  -5,   0,   0,   0,   0,   3,   0 },
-
-            {  0,   0,   0,  -2,   0,   0,   0,   4 },
-
-            {  0,   0,   0,  -4,  -3,   0,   0,   1 },
-
-            {  0,   0,   0,   0,   0,  -4,  -1,   0 }};
-    */
+    if(debuggMode)
+        cout << "Dijkstra" << endl;
 
     graphSize = cost.size();
-    d = vector<int> (graphSize);
+    path = vector<int> (graphSize);
     found1 = vector<bool> (graphSize, 0);
     dist1 = vector<int> (graphSize);
     visited = vector<vector<bool>> (graphSize, vector<bool>(graphSize));
 
-    //cout << "\n\n" << endl;
     while(1) {
-        getFlowDijkstra(cost, 0, 0);
+        getFlowDijkstra(cost, 0);
         if(visitedNewPath == false) {
             break;
         }
@@ -133,32 +90,21 @@ int minCostFlow::minCostDijkstra(vector<vector<int>> cap, vector<vector<int>> co
         int current = cost.size()-1;
         while(current) {
             if(debuggMode)
-                cout << d[current] << "-" << current << " : " << cap[d[current]][current] << endl;
+                cout << path[current] << "-" << current << " : " << cap[path[current]][current] << endl;
 
-            if(cap[d[current]][current] < minFlowValue) {
-                minFlowValue = cap[d[current]][current];
+            if(cap[path[current]][current] < minFlowValue) {
+                minFlowValue = cap[path[current]][current];
             }
-            /*if(current == 0) {
-                //cout << endl;
-                break;
-            }*/
-            current = d[current];
+            current = path[current];
         }
-        //cout << "\n" << minFlowValue << "\n" << endl;
         current = cost.size()-1;
         while(current) {
-            cap[d[current]][current] -= minFlowValue;
-            //cout << d[current] << "-" << current << " : " << cap[d[current]][current] << endl;
-            if(cap[d[current]][current] == 0) {
-                cost[d[current]][current] = 0;
-                //cout << d[current] << ", " << current << " : " << cost[d[current]][current] << endl;
+            cap[path[current]][current] -= minFlowValue;
+            if(cap[path[current]][current] == 0) {
+                cost[path[current]][current] = 0;
             }
-            current = d[current];
+            current = path[current];
         }
-        /* else {
-            cout << "HERE" << endl;
-            minCostValue -= minusCost;
-        }*/
         if(debuggMode)
             cout << "\n------------------------\n" << endl;
     }
