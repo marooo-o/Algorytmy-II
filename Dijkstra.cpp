@@ -2,13 +2,13 @@
 using namespace std;
 
 int graphSize, minCostValue = 0, addCost, minusCost;
-vector<bool> found;
-vector<int> dist, d;
+vector<int> dist1, d;
 vector<vector<bool>> visited;
 bool visitedNewPath;
+vector<bool> found1;
 
 // szukanie min dystansu
-int minCostFlow::miniDist(vector<int> dist, vector<bool> found)
+int minCostFlow::searchGraphDijkstra(vector<int> dist, vector<bool> found)
 {
     int minimum=INT_MAX,ind;
 
@@ -21,27 +21,27 @@ int minCostFlow::miniDist(vector<int> dist, vector<bool> found)
     return ind;
 }
 
-void minCostFlow::DijkstraAlgo(vector<vector<int>> cost, int src, bool print)
+void minCostFlow::getFlowDijkstra(vector<vector<int>> cost, int src, bool print)
 {
     d.clear();
-    found.assign(found.size(), false);
-    dist.assign(dist.size(), INT_MAX);
+    found1.assign(found1.size(), false);
+    dist1.assign(dist1.size(), INT_MAX);
 
     addCost = 0;
     minusCost = 0;
     int current;
 
-    dist[src] = 0;
+    dist1[src] = 0;
 
     for(int k = 0; k<graphSize; k++) {
-        int m=miniDist(dist,found);
-        found[m]=true;
+        int m=searchGraphDijkstra(dist1,found1);
+        found1[m]=true;
         for(int k = 0; k<graphSize; k++) {
             // updating the distance of neighbouring vertex
-            if(!(found[k]) && (cost[m][k]) && (dist[m]!=INT_MAX) && (dist[m]+cost[m][k]<dist[k])) {
-                dist[k]=dist[m]+cost[m][k];
+            if(!(found1[k]) && (cost[m][k]) && (dist1[m]!=INT_MAX) && (dist1[m]+cost[m][k]<dist1[k])) {
+                dist1[k]=dist1[m]+cost[m][k];
                 d[k]=m;
-                //cout << m << ", " << k << ", " << dist[k] << " : " << dist[m] << "\t\t" << cost[m][k] << endl;
+                //cout << m << ", " << k << ", " << dist1[k] << " : " << dist1[m] << "\t\t" << cost[m][k] << endl;
             }
         }
     }
@@ -75,14 +75,14 @@ void minCostFlow::DijkstraAlgo(vector<vector<int>> cost, int src, bool print)
         minCostValue += addCost;
 
     if(debuggMode)
-        cout << "cost: " << minCostValue << "; addCost: " << addCost << endl;
+        if(visitedNewPath)
+            cout << "cost: " << minCostValue << "; addCost: " << addCost << endl;
 }
 
-int minCostFlow::minCost(vector<vector<int>> cap, vector<vector<int>> cost)
+int minCostFlow::minCostDijkstra(vector<vector<int>> cap, vector<vector<int>> cost)
 {
 			//0   1   2   3   4   5   6   7
-    cout << "matrix" << endl;
-    cap = { {  0,   4,   4,  0,   0,   0,   0,   0 },
+    /*cap = { {  0,   4,   4,  0,   0,   0,   0,   0 },
 
             { -4,   0,   0,  5,   6,   0,   0,   0 },
 
@@ -114,16 +114,17 @@ int minCostFlow::minCost(vector<vector<int>> cap, vector<vector<int>> cost)
             {  0,   0,   0,  -4,  -3,   0,   0,   1 },
 
             {  0,   0,   0,   0,   0,  -4,  -1,   0 }};
+    */
 
     graphSize = cost.size();
     d = vector<int> (graphSize);
-    found = vector<bool> (graphSize, 0);
-    dist = vector<int> (graphSize);
+    found1 = vector<bool> (graphSize, 0);
+    dist1 = vector<int> (graphSize);
     visited = vector<vector<bool>> (graphSize, vector<bool>(graphSize));
 
     //cout << "\n\n" << endl;
     while(1) {
-        DijkstraAlgo(cost, 0, 0);
+        getFlowDijkstra(cost, 0, 0);
         if(visitedNewPath == false) {
             break;
         }
@@ -158,9 +159,11 @@ int minCostFlow::minCost(vector<vector<int>> cap, vector<vector<int>> cost)
             cout << "HERE" << endl;
             minCostValue -= minusCost;
         }*/
-        cout << "\n------------------------\n" << endl;
+        if(debuggMode)
+            cout << "\n------------------------\n" << endl;
     }
 
-    cout << "MIN COST: " << minCostValue << endl;
-    return 0;
+    if(debuggMode)
+        cout << "MIN COST: " << minCostValue << endl;
+    return minCostValue;
 }
