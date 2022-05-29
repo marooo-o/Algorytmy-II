@@ -26,7 +26,7 @@ Oliwer Mroczkowski
 - zaprogramowanie odpowiedniego wejścia wraz z walidacją
   wpisywanych liczb/obiektów
 - zaprogramowanie funkcji w programie, które odpowiadają
-  za funkcjonalność algorytmów (bfs, konstruowanie grafu)
+  za funkcjonalność algorytmów (bfs, konstruowanie grafu, push-relabel)
 - przygotowanie dowodu działania algorytmów
 
 ---------------------------------------------------------
