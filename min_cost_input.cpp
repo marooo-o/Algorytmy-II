@@ -77,23 +77,44 @@ void minCostFlow::readInput(string fileName)
 
         flowMatrix[x][y] = stoi(flow);
         costMatrix[x][y] = stoi(cost);
+
+        flowMatrix[y][x] = -stoi(flow);
+        costMatrix[y][x] = -stoi(cost);
     }
 
     //tworzenie glownego zrodla i ujscia
     for(int i = 0; i<fieldNum; i++) {
         flowMatrix[0][i+1] = fieldProduction[i];
-        costMatrix[0][i+1] = 1;
+        costMatrix[0][i+1] = 0;
+
+        flowMatrix[i+1][0] = -fieldProduction[i];
+        costMatrix[i+1][0] = 0;
     }
 
     for(int i = 0; i<innNum; i++) {
         flowMatrix[maks-(innNum+1)+i][maks-1] = innCapacity[i];
-        costMatrix[maks-(innNum+1)+i][maks-1] = 1;
+        costMatrix[maks-(innNum+1)+i][maks-1] = 0;
+
+        flowMatrix[maks-1][maks-(innNum+1)+i] = -innCapacity[i];
+        costMatrix[maks-1][maks-(innNum+1)+i] = 0;
     }
 
     if(debuggMode) {
+        cout << "\n------------------\n" << endl;
+        cout << "   ";
+        for(int i = 0; i<costMatrix.size(); i++) {
+            cout << i%10 << "    ";
+        }
+        cout << "\n" << endl;
         for(int i = 0; i<maks; i++) {
             for(int j=0; j<maks; j++) {
                 if(costMatrix[i][j] < 10) {
+                    cout << " ";
+                }
+                if(costMatrix[i][j] >= 0) {
+                    cout << " ";
+                }
+                if(costMatrix[i][j] > -10) {
                     cout << " ";
                 }
                 cout << costMatrix[i][j] << " ";
@@ -102,14 +123,20 @@ void minCostFlow::readInput(string fileName)
         }
 
         cout << "\n------------------\n" << endl;
-        cout << " ";
+        cout << "   ";
         for(int i = 0; i<flowMatrix.size(); i++) {
-            cout << i << "  ";
+            cout << i%10 << "    ";
         }
         cout << "\n" << endl;
         for(int i = 0; i<maks; i++) {
             for(int j=0; j<maks; j++) {
                 if(flowMatrix[i][j] < 10) {
+                    cout << " ";
+                }
+                if(flowMatrix[i][j] >= 0) {
+                    cout << " ";
+                }
+                if(flowMatrix[i][j] > -10) {
                     cout << " ";
                 }
                 cout << flowMatrix[i][j] << " ";
