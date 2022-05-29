@@ -8,7 +8,9 @@
     -Punkty graniczne każdej ćwiartki zebrane na polecenie Samwise umieszczamy w pliku input.txt
     -Współrzędne pól w królestwie umieszczamy w piliku fields.txt
     -Kompilujemy program przy pomocy polecenia g++ main.cpp
-    -Uruchamiamy propram wpisując w konsole ./a.out
+    -Uruchamiamy propram wpisując w konsole ./a.out <argument> gdzie arugment oznacza:
+                         1 - zapis w pliku pól należących do ćwiartek
+                         2 - wyświetlenie w konsoli granic ćwiartek oraz pól do nich należących
     -Otrzymujemy w konsoli granice każdej ćwiartki oraz pola przynależących do niej
     
  ---------------------------------------------------------
@@ -68,6 +70,22 @@ Fields:
  ---------------------------------------------------------
  
  ### *OUTPUT*
+ Wywołanie dla argumentu 1(zapis w pliku input2.txt)
+ ```
+ c1
+0 8
+2 8
+4 8
+4 6
+6 6
+c2
+-6 6
+-3 6
+-6 4
+-4 4
+-4 2
+ ```
+ Wywołanie dla argumentu 2(wyświetlenie w konsoli ćwiartek oraz pół przynależących do nich)
  
  ```
 granice cwiartki nr: 1
