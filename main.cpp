@@ -8,6 +8,13 @@
 using namespace std;
 
 
+/// Klasa reprezentująca punkt w kartezjańskim układzie współrzędnych,
+/// umożliwia porównanie dwóch punktów poprzez operator > jeden punkt jest większy od drugiego jeżeli jego współrzędna x jest większa, jeśli są równe decyduje
+/// o tym współrzędna y, jeżeli jest większa to punkt jest większy.
+/// dwa punkty są równe przy użyciu operatora == jeśli zarówno mają identyczne współrzędne x jak i y
+/// dwa punkty są różne != kiedy albo ich współrzędne x są różne, albo współrzędne y są róże, albo obie naraz
+/// możliwe jest wczytanie punktów przy pomocy >> najpierw wczytywana jest współrzędna x potem y
+/// możliwe jest wyświetlanie punktów przy pomocy << najpierw wyświetlana jest współrzędna x potem y a na samym końcu jest znak nowej linii
 class Point{
 
 public:
@@ -81,6 +88,17 @@ ostream & operator << (ostream &out, Point &p){
 }
 
 
+/// Funkcja obliczająca wyznacznik macierzy złożonej z punktów p,q,r uzupełnionej w ostatniej kolumnie 1
+/// |xp yp 1|
+/// |xq yq 1|
+/// |xr yr 1 |
+/// znak wyznacznika det(p,q,r) jest równy znakowi sinusa kąta nachylenia wektora p->r do wektora p->q
+/// det(p,q,r) > 0 - punkt r lęzy po lewej stronie wektora p->q
+/// det(p,q,r) = 0 - punkty p, q, r są współliniowe
+/// det(p,q,r) < 0 - punkt r leży po prawej stronie wektora p->q
+/// @param p Punkt p - początek wektora
+/// @param q  Punkt q - koniec wektora
+/// @param r  Punkt r - punkt, którego położenie chcemy znać względem wektora p->q
 int det(Point p, Point q, Point r){
     
     int d;
@@ -94,16 +112,24 @@ int det(Point p, Point q, Point r){
 }
 
 
+/// Funkcja określająca, czy punkt x jest mniejszy niż punkt y czyli czy punkt y leży dalej na prawo niż x
+/// @param x - punkt x
+/// @param y - punkt y
 bool smaller(Point x, Point y){
     return x < y;
 }
 
 
+/// Funkcja obliczająca długość wektora A->B
+/// @param A - początek wektora
+/// @param B  - koniec wektora
 double vectorLength(Point A, Point B)
 {
     return sqrt(pow(A.x - B.x, 2)+pow(A.y - B.y, 2));
 }
 
+/// Funkcja szukająca otoczki wypukłej ze zbioru punktów, zwraca wektor z punktami otoczki przeciwnie do wskazówek zegara
+/// @param ar zbiór punktów spośród których szukamy otoczki wypukłej
 vector<Point> convexHull(vector<Point> ar){
     sort(ar.begin(), ar.end(), smaller);
     int p, q, d;
@@ -134,6 +160,12 @@ vector<Point> convexHull(vector<Point> ar){
 }
 
 
+
+/// Funkcja która wczytuje dane
+/// @param quartersOfTheKingdom wektor w którym będą przetrzymywane zebrane punkty graniczne
+/// @param path1 ścieżka do pliku z punktami granicznymi
+/// @param fields wektor w którym będą przetrzymywane pola
+/// @param path2 ścieżka do pliku z polami
 void loadDate(vector<vector<Point> > &quartersOfTheKingdom,
               char path1[], vector<Point> &fields,
               char path2[]){
@@ -184,6 +216,9 @@ void loadDate(vector<vector<Point> > &quartersOfTheKingdom,
     fclose(file2);
 }
 
+/// Funkcja znajdująca granice ćwiartek
+/// @param quartersOfTheKingdom wektor w którym przetrzymywane są zebrane punkty graniczne ćwiartek
+/// @param bordersOfQuatersOfTheKingdom wektor w którym są przetrzymy punkty graniczne ćwiartek wyznaczone przez otoczkę wypukłą
 void findBordersOfQuatersOfTheKingdom(vector<vector<Point> > &quartersOfTheKingdom,
                                       vector<vector<Point> > &bordersOfQuatersOfTheKingdom){
     
@@ -198,7 +233,10 @@ void findBordersOfQuatersOfTheKingdom(vector<vector<Point> > &quartersOfTheKingd
 }
 
 
-//punkty muszą być podane przeciwnie do wskazówek zegara
+/// Sprawdza które punkty przynależą do wielokąta wypuklego, w tym przypadku wyznaczonego przez otoczkę wypukla, ktorej punkty muszą być podane przeciwnie do
+/// wskazówek zegara, zwracane są punkty wewnątrz wielokąta, punkty, ktore leza na bokach wielokata uznawane sa ze nie naleza do niego
+/// @param points - punkty które sprawdzamy, czy przynaleza do wielokata wypuklego
+/// @param convexPolygon - punkty graniczne wielokata wypuklego
 vector<Point>belongingToAConvexPolygon(vector<Point> points,
                                        vector<Point> convexPolygon){
     vector<Point> pointsInConvexPolygon;
@@ -248,6 +286,10 @@ vector<Point>belongingToAConvexPolygon(vector<Point> points,
     return pointsInConvexPolygon;
 }
 
+/// Określa które pola, naleza do ktorej cwiartki
+/// @param bordersOfQuatersOfTheKingdom wektor przetrzymujacy granice cwiartek
+/// @param fields pola
+/// @param divisionOfTheKingdom cwiartki z polami przydzielonymi do nich
 void assignFieldsToQuarter(vector<vector<Point> > bordersOfQuatersOfTheKingdom,
                            vector<Point> fields,
                            vector<vector<Point> > &divisionOfTheKingdom){
@@ -258,6 +300,8 @@ void assignFieldsToQuarter(vector<vector<Point> > bordersOfQuatersOfTheKingdom,
     
 }
 
+/// Zapisuje dane wyjsciowe w pliku
+/// @param divisionOfTheKingdom cwiartki z polami przydzielonymi do nich
 void saveInFile(vector<vector<Point> > divisionOfTheKingdom){
     ofstream file;
     file.open("input2.txt");
@@ -272,6 +316,9 @@ void saveInFile(vector<vector<Point> > divisionOfTheKingdom){
     
 }
 
+/// Wyswietla granice cwiartek oraz pola do nich przynalezace
+/// @param bordersOfQuatersOfTheKingdom granice cwiartek
+/// @param divisionOfTheKingdom pola przynalezace do cwiartek
 void displayTheBordersAndFieldsInsideOnConsole(vector<vector<Point> > bordersOfQuatersOfTheKingdom,
                                                vector<vector<Point> > divisionOfTheKingdom){
     for(int i = 0; i< bordersOfQuatersOfTheKingdom.size(); i++){
@@ -279,10 +326,11 @@ void displayTheBordersAndFieldsInsideOnConsole(vector<vector<Point> > bordersOfQ
         for(int j=0; j< bordersOfQuatersOfTheKingdom[i].size(); j++){
             cout<<bordersOfQuatersOfTheKingdom[i][j];
         }
-        cout<<"pola nalezace do cwiartki"<<endl;
+        cout<<"pola wewnatrz cwiartki nr: "<<i+1<<endl;
         for(int j=0; j< divisionOfTheKingdom[i].size(); j++){
             cout<<divisionOfTheKingdom[i][j];
         }
+        cout<<endl;
     }
 }
 
@@ -308,7 +356,7 @@ int main(int argc, char* argv[]){
             break;
         case 2:
             displayTheBordersAndFieldsInsideOnConsole(bordersOfQuatersOfTheKingdom,
-                                                      divisionOfTheKingdom);
+                                                    divisionOfTheKingdom);
             break;
             
         default:
