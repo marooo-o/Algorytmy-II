@@ -134,7 +134,9 @@ vector<Point> convexHull(vector<Point> ar){
 }
 
 
-void loadDate(vector<vector<Point> > &quartersOfTheKingdom, char path1[], vector<Point> &fields, char path2[]){
+void loadDate(vector<vector<Point> > &quartersOfTheKingdom,
+              char path1[], vector<Point> &fields,
+              char path2[]){
    
     
     int n; //ilość ćwiartek
@@ -182,7 +184,8 @@ void loadDate(vector<vector<Point> > &quartersOfTheKingdom, char path1[], vector
     fclose(file2);
 }
 
-void findBordersOfQuatersOfTheKingdom(vector<vector<Point> > &quartersOfTheKingdom, vector<vector<Point> > &bordersOfQuatersOfTheKingdom){
+void findBordersOfQuatersOfTheKingdom(vector<vector<Point> > &quartersOfTheKingdom,
+                                      vector<vector<Point> > &bordersOfQuatersOfTheKingdom){
     
     
     bordersOfQuatersOfTheKingdom.resize(quartersOfTheKingdom.size());
@@ -196,7 +199,8 @@ void findBordersOfQuatersOfTheKingdom(vector<vector<Point> > &quartersOfTheKingd
 
 
 //punkty muszą być podane przeciwnie do wskazówek zegara
-vector<Point>belongingToAConvexPolygon(vector<Point> points, vector<Point> convexPolygon){
+vector<Point>belongingToAConvexPolygon(vector<Point> points,
+                                       vector<Point> convexPolygon){
     vector<Point> pointsInConvexPolygon;
 
     
@@ -244,7 +248,9 @@ vector<Point>belongingToAConvexPolygon(vector<Point> points, vector<Point> conve
     return pointsInConvexPolygon;
 }
 
-void assignFieldsToQuarter(vector<vector<Point> > bordersOfQuatersOfTheKingdom, vector<Point> fields, vector<vector<Point> > &divisionOfTheKingdom){
+void assignFieldsToQuarter(vector<vector<Point> > bordersOfQuatersOfTheKingdom,
+                           vector<Point> fields,
+                           vector<vector<Point> > &divisionOfTheKingdom){
         
     for(int i=0; i<bordersOfQuatersOfTheKingdom.size(); i++){
         divisionOfTheKingdom.push_back(belongingToAConvexPolygon(fields, bordersOfQuatersOfTheKingdom[i]));
@@ -252,37 +258,65 @@ void assignFieldsToQuarter(vector<vector<Point> > bordersOfQuatersOfTheKingdom, 
     
 }
 
-
-
-int main(){
+void saveInFile(vector<vector<Point> > divisionOfTheKingdom){
+    ofstream file;
+    file.open("input2.txt");
+    for(int i = 0; i< divisionOfTheKingdom.size(); i++){
+        file<<"c"<<i+1<<endl;
+        for(int j=0; j< divisionOfTheKingdom[i].size(); j++){
+            file<<divisionOfTheKingdom[i][j];
+        }
+    }
     
+    file.close();
+    
+}
 
+void displayTheBordersAndFieldsInsideOnConsole(vector<vector<Point> > bordersOfQuatersOfTheKingdom,
+                                               vector<vector<Point> > divisionOfTheKingdom){
+    for(int i = 0; i< bordersOfQuatersOfTheKingdom.size(); i++){
+        cout<<"granice cwiartki nr: "<<i+1<<endl;
+        for(int j=0; j< bordersOfQuatersOfTheKingdom[i].size(); j++){
+            cout<<bordersOfQuatersOfTheKingdom[i][j];
+        }
+        cout<<"pola nalezace do cwiartki"<<endl;
+        for(int j=0; j< divisionOfTheKingdom[i].size(); j++){
+            cout<<divisionOfTheKingdom[i][j];
+        }
+    }
+}
+
+
+int main(int argc, char* argv[]){
+    
     vector<vector<Point> > quartersOfTheKingdom;
     vector<vector<Point> > bordersOfQuatersOfTheKingdom;
     vector<Point> fields;
     vector<vector<Point> > divisionOfTheKingdom;
         
     char path[] = "input.txt";
-    char path2[] = "/Users/oliviersokolowski/Desktop/algorytmy/fields.txt";
+    char path2[] = "fields.txt";
 
     loadDate(quartersOfTheKingdom, path, fields,path2);
     findBordersOfQuatersOfTheKingdom(quartersOfTheKingdom, bordersOfQuatersOfTheKingdom);
     assignFieldsToQuarter(bordersOfQuatersOfTheKingdom, fields, divisionOfTheKingdom);
     
-
-    for(int i = 0; i< bordersOfQuatersOfTheKingdom.size(); i++){
-        cout<<"granice cwiartki nr: "<<i+1<<endl;
-        for(int j=0; j< bordersOfQuatersOfTheKingdom[i].size(); j++){
-            cout<<bordersOfQuatersOfTheKingdom[i][j];
-        }
-        cout<<"pola wewnątrz cwiartki nr : "<<i+1<<endl;
-        for(int j=0; j< divisionOfTheKingdom[i].size(); j++){
-            cout<<divisionOfTheKingdom[i][j];
-        }
-        cout<<endl;
+    int p = argv[1][0] - '0';
+    switch (p) {
+        case 1:
+            saveInFile(divisionOfTheKingdom);
+            break;
+        case 2:
+            displayTheBordersAndFieldsInsideOnConsole(bordersOfQuatersOfTheKingdom,
+                                                      divisionOfTheKingdom);
+            break;
+            
+        default:
+            cout<<"Bad argument!"<<endl;
+            break;
     }
     
-    
+   
   
 
     return 0;
