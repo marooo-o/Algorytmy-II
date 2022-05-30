@@ -85,25 +85,18 @@ void minCostFlow::readInput(string fileName)
     //tworzenie glownego zrodla i ujscia
     for(int i = 0; i<fieldNum; i++) {
         flowMatrix[0][i+1] = fieldProduction[i];
-        costMatrix[0][i+1] = 0;
-
         flowMatrix[i+1][0] = -fieldProduction[i];
-        costMatrix[i+1][0] = 0;
     }
 
     for(int i = 0; i<innNum; i++) {
         flowMatrix[maks-(innNum+1)+i][maks-1] = innCapacity[i];
-        costMatrix[maks-(innNum+1)+i][maks-1] = 0;
-
         flowMatrix[maks-1][maks-(innNum+1)+i] = -innCapacity[i];
-        costMatrix[maks-1][maks-(innNum+1)+i] = 0;
     }
 
     if(debuggMode) {
-        cout << "\n------------------\n" << endl;
         cout << "   ";
-        for(int i = 0; i<costMatrix.size(); i++) {
-            cout << i%10 << "    ";
+        for(int i = 0; i<flowMatrix.size(); i++) {
+            cout << i << "    ";
         }
         cout << "\n" << endl;
         for(int i = 0; i<maks; i++) {
@@ -119,13 +112,13 @@ void minCostFlow::readInput(string fileName)
                 }
                 cout << costMatrix[i][j] << " ";
             }
-            cout << endl;
+            cout << "\t|" << i << endl;
         }
 
         cout << "\n------------------\n" << endl;
         cout << "   ";
         for(int i = 0; i<flowMatrix.size(); i++) {
-            cout << i%10 << "    ";
+            cout << i << "    ";
         }
         cout << "\n" << endl;
         for(int i = 0; i<maks; i++) {
@@ -147,5 +140,17 @@ void minCostFlow::readInput(string fileName)
         cout << "\n\nwymiary: " << flowMatrix.size() << " x " << flowMatrix[0].size() << endl;
     }
     this->cap  = flowMatrix;
-    this->cost = costMatrix;
+    this->costBellmanFord = costMatrix;
+
+    for(int i = 0; i<fieldNum; i++) {
+        costMatrix[0][i+1] = 1;
+        costMatrix[i+1][0] = -1;
+    }
+    for(int i = 0; i<innNum; i++) {
+        costMatrix[maks-(innNum+1)+i][maks-1] = 1;
+        costMatrix[maks-1][maks-(innNum+1)+i] = -1;
+    }
+
+    this->costDijkstra = costMatrix;
+
 }
