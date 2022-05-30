@@ -23,4 +23,4 @@ e razy linia postaci: w x y z, gdzie:
  
  
  WYNIK:
- program wypisuje jedna liczbe int ktora jest wartosci minimalnego kosztu przeplywu
+ program wypisuje liczbe int ktora jest wartosci minimalnego kosztu przeplywu
