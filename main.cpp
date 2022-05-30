@@ -15,38 +15,56 @@
 
 using namespace std;
 
+/**
+ * <p>struktura przechowujaca informacje o pozycjach obiektow</p>
+ */
 struct pos {
         int x, y;
 };
 
+/**
+ * <p>struktura przechowujaca informacje o polach (id, pozycja)</p>
+ */
 struct field {
         int id;
         pos p;
 };
 
+/**
+ * <p>struktura przechowujaca informacje o skrzyzowaniach (id, pozycja)</p>
+ */
 struct intersection {
         int id;
         pos p;
 };
 
+/**
+ * <p>struktura przechowujaca informacje o browarach (id, pozycja, przerob)</p>
+ */
 struct brewery {
         int id;
         pos p;
         int limit;
 };
 
+/**
+ * <p>struktura przechowujaca informacje o tawernach (id, pozycja, maksymalna sprzedaz)</p>
+ */
 struct tavern {
         int id;
         pos p;
         int sell_limit;
 };
 
+/**
+ * <p>struktura przechowujaca informacje o drogach (polaczenie obiektow, przepustowosc jeczmienia i piwa)</p>
+ */
 struct road {
         int u, v;
         int barley_capacity, beer_capacity;
 };
 /**
- *
+ * <p>struktura przechowujaca informacje dotyczace grafu, takie jak wierzcholki, posiada deklaracje wektorow</p>
  */
 struct graph {
         int n, s, t; // zrodlo i ujscie
@@ -60,6 +78,9 @@ struct graph {
                 height(n), excess(n), flow(n, vector < int > (n)) {}
 
 
+                /**
+                * <p>algorytm przeszukiwania grafu wszerz - stosowany w algorytmie Ford-Fulkerson</p>
+                */
                 int bfs() {
                 // resetujemy tablice rodzicow
                 fill(parent.begin(), parent.end(), -1);
@@ -161,7 +182,13 @@ struct graph {
                         }
                 }
         }
-
+        //algorytm push-relabel
+        /**
+         * <p>funkcja stosujaca algorytm forda push-relabel do znalezienia maksymalnego przeplywu</p>
+         * <p>stosowana w tym samym celu co Ford-Fulkerson, majac jednak 2 algorytmy, jesli zwracaja</p>
+         * <p>ten sam wynik, mamy pownosc w kwestii jego poprawnosci</p>
+         * @return maksymalny przeplyw
+         */
         int push_relabel() {
                 height[s] = n;
                 excess[s] = 1000000000; // bardzo duza wartosc przekraczajaca wszystkie inne
@@ -199,6 +226,9 @@ struct graph {
 };
 
 // struktura zawierajaca wszystkie informacje o swiecie
+/**
+ * <p>struktura przechowujaca wszystkie informacje o swiecie, takie jak pola, skrzyzowania itp.</p>
+ */
 struct world {
         // ilosc zboza produkowana przez pola
         int fields_produce;
@@ -245,7 +275,11 @@ struct world {
 
                 return g;
         }
-
+        /**
+        * <p>funkcja wywolywana tylko podczas testow, gdy ktorys z nich sie nie powiedzie</p>
+        * <p>wypisuje ona informacje o swiecie, aby uzytkownik mogl zobaczyc dla jakiego wejscia program nie dziala</p>
+        * <p>nie byla ona nigdy wywolywana na etapie testow :)</p>
+        */
         void print() {
                 cout << "fields_produce: " << fields_produce << endl;
                 cout << "fields:\n";
@@ -366,6 +400,10 @@ mt19937 gen(time(NULL)); //generator liczb losowych
 int rand_between(int a, int b) {
         return gen() % (b - a + 1) + a;
 }
+
+ /**
+ * <p>funkcja generujaca swiat w sposob losowy - uzywana podczas testow</p>
+ */
 world random_world() {
         int n_roads = 100, n_objects = 100, flow_size = 100; //deklaracja zmiennych
         world w(n_roads, rand_between(1, flow_size));
@@ -409,7 +447,9 @@ world random_world() {
 
         return w;
 }
-
+ /**
+ * <p>funkcja sluzaca do przeprowadzenia testow - wywolywana po dodaniu flagi "-DTEST" podczas kompilacji</p>
+ */
 void test() {
         int loop=0;
         while (true) {
@@ -433,8 +473,12 @@ void test() {
         }
 }
 
+/**
+ * <p>funkcja glowna, dzieki ktorej program wczytuje dane i wywoluje funkcje</p>
+ * @param txt_file
+ * @return maksymalny przeplyw biorac pod uwage oba algorytmy
+ */
 int main() {
-    int h,u,j;
         system("cls");
         system("color a"); //zmiana koloru cmd
         #ifdef TEST
@@ -448,11 +492,7 @@ int main() {
         usleep(800000);usleep(800000);usleep(800000);usleep(800000);usleep(800000);
         system("cls");
         ifstream IN("in.txt");
-        IN >> n_objects >> n_roads >> fields_produce >> h >> u >> j;
-        if((n_objects==-1) || (n_roads==-1) || (fields_produce==-1)){
-                cout<<"NIE UDALO SIE WCZYTAC PLIKU"<<endl;
-                cout<<"BADZ ZNAJDUJA SIE W NIM NIEPRAWIDLOWE DANE"<<endl;
-        }else{
+        IN >> n_objects >> n_roads >> fields_produce;
         cout << "Wczytuje dane z pliku..." << endl; cout << "  [                    ]  0%" << endl; usleep(20000); system("cls");
         cout << "Wczytuje dane z pliku..." << endl; cout << "  [|                   ]  5%" << endl; usleep(20000); system("cls");
         cout << "Wczytuje dane z pliku..." << endl; cout << "  [||                  ]  10%" << endl; usleep(20000); system("cls");
@@ -474,8 +514,12 @@ int main() {
         cout << "Wczytuje dane z pliku..." << endl; cout << "  [||||||||||||||||||  ]  90%" << endl; usleep(20000); system("cls");
         cout << "Wczytuje dane z pliku..." << endl; cout << "  [||||||||||||||||||| ]  95%" << endl; usleep(20000); system("cls");
         cout << "Wczytuje dane z pliku..." << endl; cout << "  [||||||||||||||||||||]  100%" << endl; usleep(40000); system("cls");
-        cout << "Udalo sie wczytac wszystkie wartosci" << endl; //wyswietlanie "ladowania" :)
-        cout << "oczekiwany wynik to: 11";
+        //cout << "oczekiwany wynik to: 11"; //przy in.txt
+        if((n_objects==-1) || (n_roads==-1) || (fields_produce==-1)){
+                cout<<"NIE UDALO SIE WCZYTAC PLIKU"<<endl;
+                cout<<"BADZ ZNAJDUJA SIE W NIM NIEPRAWIDLOWE DANE"<< endl <<endl;
+        }else{
+cout << "Udalo sie wczytac wszystkie wartosci" << endl;
         //cout << n_objects << " " << n_roads << " " << fields_produce << endl;
         world w(n_roads, fields_produce); 
         // input
@@ -537,7 +581,7 @@ int main() {
         int flow = g.push_relabel();
         int flow2 = g.ford_fulkerson();
         if(flow==flow2){
-        cout << endl << endl << "maksymalnych przeplyw z" << "danych znajdujacych sie w wejscu to: " << flow << endl;
+        cout << endl << "maksymalnych przeplyw z" << "danych znajdujacych sie w wejscu to: " << flow << endl << endl;
         }
         }
         IN.close();
