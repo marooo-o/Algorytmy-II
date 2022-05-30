@@ -54,7 +54,7 @@ Adam Rudlicki
 
 ### *OBSŁUGA*
 
-- Wejście wklejamy do pliku input.txt
+- Wejście wklejamy do pliku in.txt
 - Uruchamiamy a.exe
 - Wynik programu zostanie wyświetlony w terminalu
 
@@ -62,7 +62,7 @@ Adam Rudlicki
 
 ### *INPUT*
 
-W pierwszej linijce wejścia muszą znajdować się 3 oddzielone spacjami liczby: sumaryczna liczba obiektów (karczm, skrzyżowań, pól, browarów), liczba dróg, i liczba jęczmieńa jaką produkują pola.
+W pierwszej linijce wejścia muszą znajdować się 3 oddzielone spacjami liczby: sumaryczna liczba obiektów (karczm, skrzyżowań, pól, browarów), liczba dróg, i liczba jęczmienia jaką produkują pola.
 Niech n = liczba obiektów. Następne n linijek opisuje obiekty. Pierwszy znak oddzielony od reszty linijki spacją wyznacza rodzaj i-tego obiektu, gdzie i to numer linijki (od 1 do n).
 Jeśli pierwszy znak to
 - f: opisujemy pole, kolejne 2 liczby to x i y tego pola na mapie.
@@ -72,6 +72,8 @@ Jeśli pierwszy znak to
 
 Niech m = liczba dróg. Kolejne m linijek opisuje każdą z dróg. Opis składa się z 4 liczb oddzielonych spacjami: 1 i 2 liczba to numery obiektów, które łączy droga.
 Następne dwie liczby to przepustowość jęczmienia przez drogę (ile może przez drogę przechodzić piwa) i przepustowość piwa.
+
+(zakładamy poprawne wejście, zabezpieczone jednak zostało: brak pliku tekstowago, jego zawartość w postaci pierwszej linijki - czy znajdują się 3 liczby)
 
 
 ---------------------------------------------------------
@@ -94,7 +96,7 @@ t 5 4 12
 4 6 0 6
 5 6 0 5
 
-Out:
+Output:
 11
 ```
 
@@ -121,20 +123,20 @@ Do czynienia mamy jednak ze dwoma przepływami - w jednym przepływa zboże, a d
 Możemy więc podwoić graf, tak że nowy graf ma dwie warstwy z zduplikowanymi wierzchołkami i krawędziami.
 Jedna z tych warstw będzie służyła przedstawieniu przepływu piwa, a druga przepływowi zboża, w związku z tym,
 w jednej z nich na krawędziach wagami (/przepustowościami) będą przepustowości zboża a w drugiej piwa.
-Także wiemy, że w browarze można przerobić daną ilość x zboża na x piwa. Oznacza to, że w takim grafie,
+Wiemy także, że w browarze można przerobić daną ilość x zboża na x piwa. Oznacza to, że w takim grafie,
 istnieje krawędź pomiędzy obydwoma wierzchołkami odpowiednimi danemu browarowi, której przepustowość to x.
 Do browaru wpłynie maksymalnie x zboża, całe zboże jakie wpłynie zostanie przetworzone na piwo,
 czyli przepłynie do drugiego grafu tą krawędzią i będzie wypływać z browaru jako zboże.
 
 Do naszego grafu brakuje dodać tylko dwa sztuczne wierzchołki - źródło i odpływ.
 Chcemy, żeby z każdego pola mogło wypływać limit zboża, gdzie limit to limit produkcji każdego z pól.
-Jest to równoznaczne ze stworzeniem krawędzi źródło - pole o przepustowości limit.
+Jest to równoznaczne ze stworzeniem krawędzi źródło - pole o przepustowości "limit".
 Tworzymy, więc takie krawędzie dla każdego pola i analogicznie od każdej karczmy prowadzimy krawędź do odpływu.
 Po zaaplikowaniu dowolnego algorytmu maksymalnego przepływu na tak skonstruowanym grafie dostajemy odpowiedź.
 
 Powyższy graf zostanie przekształcony w graf przepływowy o następującym kształcie:
 ![](https://i.imgur.com/86bkVAI.png)
 
->Kod stosuje algorytm Forda-Fulkersona lub algorytm push-relabel by znaleźć odpowiedź.
+>Kod stosuje algorytm Forda-Fulkersona i algorytm push-relabel by znaleźć odpowiedź.
 
 ---------------------------------------------------------
