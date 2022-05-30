@@ -104,7 +104,7 @@ Out:
 #### *TESTOWANIE*
 
 >By włączyć testowanie programu, należy skompilować go z flagą "-DTEST".
-Wykonanie go włączy sprawdzanie randomizowanych przykładów, dopóki program nie zostanie zakończony.
+Wykonanie go włączy sprawdzanie randomizowanych przykładów, zostanie przeprowadzonych 100 testów (jeżeli któryś z nich nie przebiegnie pomyślnie, zostaną wypisane dane, a dalsze testy nie wykonają się).
 
 ---------------------------------------------------------
 
