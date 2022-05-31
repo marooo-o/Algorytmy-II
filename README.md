@@ -275,7 +275,7 @@ Input:
 10 -6
 10 -4
 10 -2
-14 0
+-14 0
 -20 10
 -20 8
 -20 6
@@ -411,6 +411,7 @@ granice cwiartki nr: 4
 -12 -6
 -6 -8
 10 -8
+10 -2
 14 0
 pola wewnatrz cwiartki nr: 4
 8 -6
