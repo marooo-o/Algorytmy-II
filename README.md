@@ -412,7 +412,7 @@ granice cwiartki nr: 4
 -6 -8
 10 -8
 10 -2
-14 0
+-14 0
 pola wewnatrz cwiartki nr: 4
 8 -6
 4 -4
