@@ -8,10 +8,10 @@
 
 using namespace std;
 
-bool debuggMode, testMode;
+bool debuggMode = 0, testMode = 0;
 vector<vector<int>> cap, costDijkstra, costBellmanFord;
 
-
+//wczytywanie wjescia
 void readInput(string fileName)
 {
     int tmp;
@@ -102,6 +102,7 @@ void readInput(string fileName)
         flowMatrix[maks-1][maks-(innNum+1)+i] = -innCapacity[i];
     }
 
+    //wypisuje stworzone macierze jesli debuggMode aktywny
     if(debuggMode) {
         cout << "   ";
         for(int i = 0; i<flowMatrix.size(); i++) {
@@ -219,11 +220,8 @@ void getFlowDijkstra(vector<vector<int>> costTmp, int src, vector<vector<int>> c
             visitedNewPath = true;
         }
         if(path[current]!= 0 && current != cost.size()-1) {
-            //addCost--;
             addCost += cost[path[current]][current];
         }
-        //addCost += cost[d[current]][current];
-        //usuwanie nadmiarowego kosztu, chyba ze znajde sposob aby algorytm nie ignorowal sciezek o koszcie 0
         current = path[current];
     }
     if(visitedNewPath)
@@ -263,6 +261,8 @@ int minCostDijkstra(vector<vector<int>> cap, vector<vector<int>> cost)
             }
         }
     }
+
+    //wypisywanie macierzy
     if(debuggMode) {
         cout << "minCostPathValue: " << minCostVal << endl;
         cout << "\n------------------\ncostMatrix:\n" << endl;
@@ -286,10 +286,11 @@ int minCostDijkstra(vector<vector<int>> cap, vector<vector<int>> cost)
             }
             cout << "\t|" << i << endl;
         }
+        cout << "------------------\n" << endl;
     }
-    cout << "------------------\n" << endl;
     while(1) {
         getFlowDijkstra(tmpCost, 0, cost);
+        //jesli nie dokonano zadny zmian, to wyjdz z petli
         if(visitedNewPath == false) {
             break;
         }
@@ -330,6 +331,7 @@ vector<int> dist2, dad, pi;
 vector<vector<int>> flow;
 vector<bool> found2;
 
+//sprawdzanie czy istnieje sciezka ze zrodla do ujscia
 bool searchGraphBellmanFord(int src, int sink) {
 
     found2.assign(found2.size(), false);
@@ -363,8 +365,6 @@ bool searchGraphBellmanFord(int src, int sink) {
                 best = k;
         }
         src = best;
-        //if(debuggMode)
-        //    cout << src << endl;
     }
     for (int k = 0; k < N; k++)
         pi[k] = min(pi[k] + dist2[k], INF);
@@ -382,12 +382,10 @@ int getFlowBellmanFord(int src, int sink) {
         for (int x = sink; x != src; x = dad[x])
         amt = min(amt, flow[x][dad[x]] != 0 ? flow[x][dad[x]] : cap[dad[x]][x] - flow[dad[x]][x]);
         for (int x = sink; x != src; x = dad[x]) {
-            //if(x == N-1 || dad[x] == 0)
-            //   continue;
             if (flow[x][dad[x]] != 0) {
                 flow[x][dad[x]] -= amt;
                 totcost -= /*amt * */ cost[x][dad[x]];
-                //if(debuggMode)
+                if(debuggMode)
                     cout << x << " - " << dad[x] << endl;
             } else {
                 flow[dad[x]][x] += amt;
@@ -416,6 +414,7 @@ int minCostBellmanFord(vector<vector<int>> capIn, vector<vector<int>> costIn) {
     pi = vector<int> (N);
 
 
+    //wypisywanie macierzy
     if(debuggMode) {
         int loopSize = cost.size();
         cout << "BellmanFord" << endl;
@@ -440,8 +439,8 @@ int minCostBellmanFord(vector<vector<int>> capIn, vector<vector<int>> costIn) {
             }
             cout << "\t|" << i << endl;
         }
+        cout << "------------------" << endl;
     }
-    cout << "------------------" << endl;
 
     int wynik = getFlowBellmanFord(s, t);
 
@@ -455,17 +454,25 @@ int minCostBellmanFord(vector<vector<int>> capIn, vector<vector<int>> costIn) {
 int main() {
     string fileName = "inCost1.txt";
     int finalCost1, finalCost2;
-
-
-    debuggMode = 1;
-    testMode = 1;
+    char c;
+    cout << "debugg mode: t/n  -  ";
+    cin >> c;
+    if(c == 't') {
+        debuggMode = 1;
+    }
+    cout << "test mode: t/n  -  ";
+    cin >> c;
+    if(c == 't') {
+        testMode = 1;
+    }
+    system("cls");
     readInput(fileName);
     finalCost1 = minCostBellmanFord(cap, costBellmanFord);
     if(testMode) {
         finalCost2 = minCostDijkstra(cap, costDijkstra);
 
         if(finalCost1 == finalCost2) {
-            cout << "COMPLETE. Min cost: " << finalCost1 << " == " << finalCost2 << endl;
+            cout << "COMPLETE: BellmanFord - Dijkstra\n Min cost: " << finalCost1 << " == " << finalCost2 << endl;
         } else {
             cout << "ERROR:  BellmanFord: " << finalCost1 << " != Dijkstra: " << finalCost2 << endl;
         }
