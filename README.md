@@ -221,7 +221,7 @@ pola wewnatrz cwiartki nr: 1
  
   ---------------------------------------------------------
   
-  ### 1) pliki input3.txt oraz fields3.txt (argument 3)
+  ### 2) pliki input3.txt oraz fields3.txt (argument 3)
 wizualnie: 
 
 ![3](https://user-images.githubusercontent.com/82097861/171163605-57db795e-98cd-4df9-8d70-01f6cbeb46f7.png)
@@ -440,7 +440,58 @@ pola wewnatrz cwiartki nr: 6
 15 6
 15 4
 
+ ```
+ 
+ ---------------------------------------------------------
+ 
+ ### 3) pliki input4.txt oraz fields4.txt (argument 4)
+wizualnie: 
+
+
+![4](https://user-images.githubusercontent.com/82097861/171165418-5ff61a6a-76cf-4cbc-9f75-9aedc6cbe710.png)
+
+```
+Input:
+2 
+3
+3
+1 4
+3 6
+4 4
+7 5
+8 2
+10 5
+
+Fields: 
+4
+-1 6
+-1 5
+-1 4
+-1 2
+```
+
+### *OUTPUT*
+ zapis w pliku input-test.txt
+ ```
+ c1
+c2
 
  ```
+ wyświetlenie w konsoli ćwiartek oraz pół przynależących do nich
+ 
+ ```
+ granice cwiartki nr: 1
+1 4
+4 4
+3 6
+pola wewnatrz cwiartki nr: 1
+
+granice cwiartki nr: 2
+7 5
+8 2
+10 5
+pola wewnatrz cwiartki nr: 2
+ ```
+ 
 
  
