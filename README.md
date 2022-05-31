@@ -142,5 +142,24 @@ Została jeszcze kwestia przecinania odcinka i półprostej, półprosta w rozwi
  ### Uwagi
  
  Ćwiartki należy podawać tak aby były rozłączne, pola, które nie należą do żadnej ćwiartki są pomijane, pola leżące na granicach ćwiartek również. 
-
-
+ 
+  ---------------------------------------------------------
+  
+  ### *Dokumentacja*
+  
+  Dokumentacja znajduję się w pliku main.cpp nad każdą metodą oraz klasą znajdują się komentarze opisujące co dana metoda robi, jakie przyjmuje parametry oraz co zostaje zwrócone
+  
+ ---------------------------------------------------------
+    
+  ### *Testy*
+  
+  W katalogu tests znajduje się plik main-kopia.cpp jest to kopia pliku main.cpp z katalogu głównego, która została zmienione jedynie o gotowe ścieżki do różnych danych testowych. W katalogach inputs oraz fields znajdują się dane do testowania z czego numerki przy ich nazwach odpowiadają sobie tzn. jeśli pola nazwyają się fields3.txt są testowane z input3.txt na szczęście użytkownik nie musi się o to martwić, ponieważ ścieżki do katalogów są ustawione na sztywno w main-kopia.cpp. 
+   
+### *OBSŁUGA*
+    -Wchodzimy do katalogu tests
+    -Kompilujemy program przy pomocy polecenia g++ main-kopia.cpp -o tests 
+    -Uruchamiamy propram wpisując w konsole ./tests <argument> gdzie arugment oznacza:
+                         1 - użycie danych testowych z plików input.txt oraz fields
+                         3 - użycie danych testowych z plików input3.txt oraz fields3.txt
+                         4 - użycie danych testowych z plików input4.txt oraz fields4.txt
+    -Otrzymujemy w konsoli granice każdej ćwiartki oraz pola przynależących do niej, a w katalogu tests otrzymujemy plik input-tests.txt z polami należącymi do każdej ćwiartki rozdzielonych c<numer ćwiartki> np. c3 gdzie 3 to numer ćwiartki 
