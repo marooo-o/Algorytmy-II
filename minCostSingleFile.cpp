@@ -324,7 +324,7 @@ int minCostDijkstra(vector<vector<int>> cap, vector<vector<int>> cost)
 
 int N;
 int INF	= INT_MAX / 2 - 1;
-vector<vector<int>> cap, cost;
+vector<vector<int>> cost;
 vector<int> dist2, dad, pi;
 vector<vector<int>> flow;
 vector<bool> found2;
