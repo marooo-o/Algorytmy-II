@@ -251,7 +251,7 @@ struct world {
         }
 
         // oznaczamy, ze pole produkuje dana ilosc zboza poprzez
-        // dodanie krawedzi z zrodla przeplywu do wierzcholka pola
+        // dodanie krawedzi ze zrodla przeplywu do wierzcholka pola
         for (size_t i = 0; i < fields.size(); ++i) {
             field f = fields[i];
             g.add_directed_edge(0, f.id, fields_produce);
@@ -466,7 +466,7 @@ void test() {
         }
         //zakomentować if'a, jeśli chcemy nieskonczenie wiele testow
         if (loop == 100) {
-            exit(0);
+        //    exit(0);
         }
     }
 }
@@ -480,18 +480,19 @@ int main() {
     system("cls");
     system("color a"); //zmiana koloru cmd
     #ifdef TEST
-    test(); //przeprowadzanie testow (powinno byc CORRECT)
+    test(); //przeprowadzanie testow 
     #endif
     int n_objects = -1, n_roads = -1, fields_produce = -1;
     //cin >> n_objects >> n_roads >> fields_produce;
-    cout << "Program liczacy maksymalny przeplyw piwa" << endl;
-    cout << "ktory mozna dostarczyc za pomoca drog z browarow do karczm" << endl;
-    cout << "biorac pod uwage wystepujace skrzyzowania" << endl;
-    usleep(800000); usleep(800000); usleep(800000); usleep(800000); usleep(800000);
+    //cout << "Program liczacy maksymalny przeplyw piwa" << endl;
+    //cout << "ktory mozna dostarczyc za pomoca drog z browarow do karczm" << endl;
+    //cout << "biorac pod uwage wystepujace skrzyzowania" << endl;
+    //usleep(800000); usleep(800000); usleep(800000); usleep(800000); usleep(800000);
     system("cls");
     ifstream IN("in.txt");
     IN >> n_objects >> n_roads >> fields_produce;
-    cout << "Wczytuje dane z pliku..." << endl; cout << "  [                    ]  0%" << endl; usleep(20000); system("cls"); cout << "Wczytuje dane z pliku..." << endl; cout << "  [|                   ]  5%" << endl; usleep(20000); system("cls");
+    cout << "Wczytuje dane z pliku..." << endl; cout << "  [                    ]  0%" << endl; usleep(20000); system("cls");
+    cout << "Wczytuje dane z pliku..." << endl; cout << "  [|                   ]  5%" << endl; usleep(20000); system("cls");
     cout << "Wczytuje dane z pliku..." << endl; cout << "  [||                  ]  10%" << endl; usleep(20000); system("cls");
     cout << "Wczytuje dane z pliku..." << endl; cout << "  [|||                 ]  15%" << endl; usleep(20000); system("cls");
     cout << "Wczytuje dane z pliku..." << endl; cout << "  [||||                ]  20%" << endl; usleep(20000); system("cls");
@@ -579,6 +580,9 @@ int main() {
         int flow2 = g.ford_fulkerson();
         if (flow == flow2) {
             cout << endl << "maksymalnych przeplyw z" << "danych znajdujacych sie w wejscu to: " << flow << endl << endl;
+        }else{
+                cout << endl << "cos poszlo nie tak: " << flow << " " << flow2 << endl << endl;
+                w.print();
         }
     }
     IN.close();
