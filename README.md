@@ -168,12 +168,279 @@ Została jeszcze kwestia przecinania odcinka i półprostej, półprosta w rozwi
     
 ### *Przeprowadzone testy*
 
-### 1) pliki input.txt oraz fields.txt
+### 1) pliki input.txt oraz fields.txt (argument 1)
 wizualnie: 
 
 ![1](https://user-images.githubusercontent.com/82097861/171162270-8fad8e61-b1ba-4ae4-baef-e91ad2e9c0bb.png)
 
--niebieskie kropki - punkty graniczne ćwiartki zebrane na polecenie Sam'a
--fioletowe kropki - zaznaczona otoczka wypukła
--różowe pola - pola wewnątrz ćwiartki
+(niebieskie kropki - punkty graniczne ćwiartki zebrane na polecenie Sam'a, fioletowe kropki - zaznaczona otoczka wypukła ,różowe pola - pola wewnątrz ćwiartki)
+
+```
+Input:
+1
+11
+1 6
+2 5
+3 4
+4 3
+4 2
+4 1
+3 1
+2 1
+1 1
+-1 1
+-1 4
+
+Fields: 
+2
+1 2
+2 2
+```
+
+### *OUTPUT*
+ zapis w pliku input-test.txt
+ ```
+c1
+1 2
+2 2
+ ```
+ wyświetlenie w konsoli ćwiartek oraz pół przynależących do nich
+ 
+ ```
+granice cwiartki nr: 1
+-1 1
+4 1
+4 3
+1 6
+-1 4
+pola wewnatrz cwiartki nr: 1
+1 2
+2 2
+
+ ```
+ 
+  ---------------------------------------------------------
+  
+  ### 1) pliki input3.txt oraz fields3.txt (argument 3)
+wizualnie: 
+
+![3](https://user-images.githubusercontent.com/82097861/171163605-57db795e-98cd-4df9-8d70-01f6cbeb46f7.png)
+
+![pole 1 ](https://user-images.githubusercontent.com/82097861/171163664-765d560c-545c-43ad-959c-5a2bd7933b2e.png)
+
+
+```
+Input:
+6
+11
+9
+8
+10
+12
+4
+0 2
+1 1
+3 1
+4 2
+4 3
+3 4
+1 3
+2 3
+3 0
+3 3
+2 2
+-6 2
+-4 1
+-2 4
+-2 6
+-4 8
+-6 8
+-8 8
+-8 6
+-8 4
+-2 8
+2 6
+6 4
+8 4
+8 6
+6 8
+4 10
+0 10
+-16 -2
+-12 -6
+-6 -8
+2 -8
+6 -8
+10 -8
+10 -6
+10 -4
+10 -2
+14 0
+-20 10
+-20 8
+-20 6
+-20 4
+-18 4
+-16 4
+-14 4
+-14 6
+-14 8
+-14 10
+-16 10
+-18 10
+15 -2
+20 4
+14 10
+10 4
+
+Fields: 
+26
+-18 8
+-16 8
+-18 6
+-16 6
+-6 6
+-3 6
+-6 4
+-4 4
+-4 2
+0 8
+2 8
+4 8
+4 6
+6 6
+2 3
+3 3
+2 2
+3 1
+15 6
+15 4
+8 -6
+4 -4
+-2 -6
+-8 -4
+-8 -2
+-12 -2
+```
+
+### *OUTPUT*
+ zapis w pliku input-test.txt
+ ```
+ c1
+2 3
+3 3
+2 2
+3 1
+c2
+-6 6
+-3 6
+-6 4
+-4 4
+-4 2
+c3
+0 8
+2 8
+4 8
+4 6
+6 6
+c4
+8 -6
+4 -4
+-2 -6
+-8 -4
+-8 -2
+-12 -2
+c5
+-18 8
+-16 8
+-18 6
+-16 6
+c6
+15 6
+15 4
+
+ ```
+ wyświetlenie w konsoli ćwiartek oraz pół przynależących do nich
+ 
+ ```
+granice cwiartki nr: 1
+0 2
+1 1
+3 0
+4 2
+4 3
+3 4
+1 3
+pola wewnatrz cwiartki nr: 1
+2 3
+3 3
+2 2
+3 1
+
+granice cwiartki nr: 2
+-8 4
+-6 2
+-4 1
+-2 4
+-2 6
+-4 8
+-8 8
+pola wewnatrz cwiartki nr: 2
+-6 6
+-3 6
+-6 4
+-4 4
+-4 2
+
+granice cwiartki nr: 3
+-2 8
+6 4
+8 4
+8 6
+4 10
+0 10
+pola wewnatrz cwiartki nr: 3
+0 8
+2 8
+4 8
+4 6
+6 6
+
+granice cwiartki nr: 4
+-16 -2
+-12 -6
+-6 -8
+10 -8
+14 0
+pola wewnatrz cwiartki nr: 4
+8 -6
+4 -4
+-2 -6
+-8 -4
+-8 -2
+-12 -2
+
+granice cwiartki nr: 5
+-20 4
+-14 4
+-14 10
+-20 10
+pola wewnatrz cwiartki nr: 5
+-18 8
+-16 8
+-18 6
+-16 6
+
+granice cwiartki nr: 6
+10 4
+15 -2
+20 4
+14 10
+pola wewnatrz cwiartki nr: 6
+15 6
+15 4
+
+
+ ```
+
  
