@@ -205,7 +205,7 @@ void getFlowDijkstra(vector<vector<int>> costTmp, int src, vector<vector<int>> c
                 dist1[k]=dist1[m]+costTmp[m][k];
                 path[k]=m;
                 if(debuggMode)
-                    cout << m << ", " << k << ", dist: " << dist1[m] << " : " << dist1[k] << "\t\t" << costTmp[m][k] << endl;
+                    cout << m << " - " << k << ", dist m: " << dist1[m] << " : dist k: " << dist1[k] << "\t\t cost m-k: " << costTmp[m][k] << endl;
             }
         }
     }
@@ -231,7 +231,7 @@ void getFlowDijkstra(vector<vector<int>> costTmp, int src, vector<vector<int>> c
 
     if(debuggMode)
         if(visitedNewPath)
-            cout << "cost: " << minCostValue << "; addCost: " << addCost << endl;
+            cout << "\ncost: " << minCostValue << "; addCost: " << addCost << "\n" << endl;
 }
 
 int minCostDijkstra(vector<vector<int>> cap, vector<vector<int>> cost)
@@ -264,8 +264,8 @@ int minCostDijkstra(vector<vector<int>> cap, vector<vector<int>> cost)
         }
     }
     if(debuggMode) {
-        cout << "minCostValue: " << minCostVal << endl;
-        cout << "\n------------------\n" << endl;
+        cout << "minCostPathValue: " << minCostVal << endl;
+        cout << "\n------------------\ncostMatrix:\n" << endl;
         cout << "   ";
         for(int i = 0; i<loopSize; i++) {
             cout << i%10 << "    ";
@@ -287,6 +287,7 @@ int minCostDijkstra(vector<vector<int>> cap, vector<vector<int>> cost)
             cout << "\t|" << i << endl;
         }
     }
+    cout << "------------------\n" << endl;
     while(1) {
         getFlowDijkstra(tmpCost, 0, cost);
         if(visitedNewPath == false) {
@@ -361,10 +362,9 @@ bool searchGraphBellmanFord(int src, int sink) {
             if (dist2[k] < dist2[best])
                 best = k;
         }
-
         src = best;
-        if(debuggMode)
-            cout << src << endl;
+        //if(debuggMode)
+        //    cout << src << endl;
     }
     for (int k = 0; k < N; k++)
         pi[k] = min(pi[k] + dist2[k], INF);
@@ -375,8 +375,9 @@ bool searchGraphBellmanFord(int src, int sink) {
 int getFlowBellmanFord(int src, int sink) {
 
 	int totcost = 0;
-
+    int tmpcost;
 	while (searchGraphBellmanFord(src, sink)) {
+        tmpcost = totcost;
 		int amt = INF;
         for (int x = sink; x != src; x = dad[x])
         amt = min(amt, flow[x][dad[x]] != 0 ? flow[x][dad[x]] : cap[dad[x]][x] - flow[dad[x]][x]);
@@ -386,13 +387,18 @@ int getFlowBellmanFord(int src, int sink) {
             if (flow[x][dad[x]] != 0) {
                 flow[x][dad[x]] -= amt;
                 totcost -= /*amt * */ cost[x][dad[x]];
+                //if(debuggMode)
+                    cout << x << " - " << dad[x] << endl;
             } else {
                 flow[dad[x]][x] += amt;
                 totcost += /*amt * */ cost[dad[x]][x];
+                if(debuggMode) {
+                    cout << dad[x] << " - " << x << endl;
+                }
             }
         }
         if(debuggMode)
-            cout << "cost: " << totcost << endl;
+            cout << "cost: " << totcost << ", added cost: " << totcost-tmpcost << "\n" << endl;
     }
 
     return totcost;
@@ -413,7 +419,7 @@ int minCostBellmanFord(vector<vector<int>> capIn, vector<vector<int>> costIn) {
     if(debuggMode) {
         int loopSize = cost.size();
         cout << "BellmanFord" << endl;
-        cout << "\n------------------\n" << endl;
+        cout << "\n------------------\ncostMatrix:\n" << endl;
         cout << "   ";
         for(int i = 0; i<loopSize; i++) {
             cout << i%10 << "    ";
@@ -435,23 +441,23 @@ int minCostBellmanFord(vector<vector<int>> capIn, vector<vector<int>> costIn) {
             cout << "\t|" << i << endl;
         }
     }
-
+    cout << "------------------" << endl;
 
     int wynik = getFlowBellmanFord(s, t);
 
     if(debuggMode) {
-        cout << "cost: " << wynik << endl;
+        cout << "final cost: " << wynik << endl;
         cout << "\n\n" << endl;
     }
     return wynik;
 }
 
 int main() {
-    string fileName = "inCost.txt";
+    string fileName = "inCost1.txt";
     int finalCost1, finalCost2;
 
 
-    debuggMode = 0;
+    debuggMode = 1;
     testMode = 1;
     readInput(fileName);
     finalCost1 = minCostBellmanFord(cap, costBellmanFord);
