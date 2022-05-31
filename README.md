@@ -119,8 +119,8 @@ Na każdej krawędzi mamy zdefiniowane, dwa parametry - przepustowość zboża i
 
 
 Problem można przedstawić jako problem maksymalnego przepływu.
-Do czynienia mamy jednak ze dwoma przepływami - w jednym przepływa zboże, a drugim piwo.
-Możemy więc podwoić graf, tak że nowy graf ma dwie warstwy z zduplikowanymi wierzchołkami i krawędziami.
+Do czynienia mamy jednak z dwoma przepływami - w jednym przepływa zboże, a drugim piwo.
+Możemy więc podwoić graf, tak że nowy graf ma dwie warstwy ze zduplikowanymi wierzchołkami i krawędziami.
 Jedna z tych warstw będzie służyła przedstawieniu przepływu piwa, a druga przepływowi zboża, w związku z tym,
 w jednej z nich na krawędziach wagami (/przepustowościami) będą przepustowości zboża a w drugiej piwa.
 Wiemy także, że w browarze można przerobić daną ilość x zboża na x piwa. Oznacza to, że w takim grafie,
