@@ -163,3 +163,17 @@ Została jeszcze kwestia przecinania odcinka i półprostej, półprosta w rozwi
                          3 - użycie danych testowych z plików input3.txt oraz fields3.txt
                          4 - użycie danych testowych z plików input4.txt oraz fields4.txt
     -Otrzymujemy w konsoli granice każdej ćwiartki oraz pola przynależących do niej, a w katalogu tests otrzymujemy plik input-tests.txt z polami należącymi do każdej ćwiartki rozdzielonych c<numer ćwiartki> np. c3 gdzie 3 to numer ćwiartki 
+    
+    
+    
+### *Przeprowadzone testy*
+
+### 1) pliki input.txt oraz fields.txt
+wizualnie: 
+
+![1](https://user-images.githubusercontent.com/82097861/171162270-8fad8e61-b1ba-4ae4-baef-e91ad2e9c0bb.png)
+
+-niebieskie kropki - punkty graniczne ćwiartki zebrane na polecenie Sam'a
+-fioletowe kropki - zaznaczona otoczka wypukła
+-różowe pola - pola wewnątrz ćwiartki
+ 
