@@ -466,7 +466,7 @@ void test() {
         }
         //zakomentować if'a, jeśli chcemy nieskonczenie wiele testow
         if (loop == 100) {
-        //    exit(0);
+            exit(0);
         }
     }
 }
