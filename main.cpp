@@ -1,17 +1,4 @@
-/*
-#include <iostream>
-#include <vector>
-#include <limits>
-#include <queue>
-#include <random>
-#include <cassert>
-#include <ctime>
-#include <fstream>
-#include <chrono>
-#include <thread>
-*/
 #include <bits/stdc++.h>
-
 #include <unistd.h>
 
 using namespace std;
@@ -146,6 +133,7 @@ struct graph {
         return flow;
     }
 
+    //przesłanie nadmiarowego przepływu z u do v
     void push(int u, int v) {
         int d = min(excess[u], cap[u][v] - flow[u][v]);
         flow[u][v] += d;
@@ -156,30 +144,36 @@ struct graph {
             excess_vertices.push(v);
     }
 
+    //zwiększenie wysokości u do momentu kiedy jest o 1 wiekszy od najniższego sąsiada
     void relabel(int u) {
         int d = numeric_limits < int > ::max();
         for (int i = 0; i < n; i++) {
-            if (cap[u][i] - flow[u][i] > 0)
+            if (cap[u][i] - flow[u][i] > 0){
                 d = min(d, height[i]);
+            }
         }
-        if (d < numeric_limits < int > ::max())
+        if (d < numeric_limits < int > ::max()){
             height[u] = d + 1;
+        }
     }
 
+    //umieszczenie wierzcholka u na początku listy
     void discharge(int u) {
         while (excess[u] > 0) {
             if (seen[u] < n) {
                 int v = seen[u];
-                if (cap[u][v] - flow[u][v] > 0 && height[u] > height[v])
+                if (cap[u][v] - flow[u][v] > 0 && height[u] > height[v]){
                     push(u, v);
-                else
+                } else {
                     seen[u]++;
+                }
             } else {
                 relabel(u);
                 seen[u] = 0;
             }
         }
     }
+
     //algorytm push-relabel
     /**
      * <p>funkcja stosujaca algorytm forda push-relabel do znalezienia maksymalnego przeplywu</p>
@@ -192,30 +186,35 @@ struct graph {
         excess[s] = 1000000000; // bardzo duza wartosc przekraczajaca wszystkie inne
 
         for (int i = 0; i < n; i++) {
-            if (i != s)
+            if (i != s){
                 push(s, i);
+            }
         }
         seen.assign(n, 0);
 
         while (!excess_vertices.empty()) {
             int u = excess_vertices.front();
             excess_vertices.pop();
-            if (u != s && u != t)
+            if (u != s && u != t){
                 discharge(u);
+            }
         }
 
         int max_flow = 0;
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++){
             max_flow += flow[i][t];
+        }
         return max_flow;
     }
 
+    //dodanie krawedzi
     void add_edge(int u, int v, int capacity) {
         adj[u].push_back(v);
         adj[v].push_back(u);
         cap[u][v] = cap[v][u] = capacity;
     }
 
+    //dodanie krawedzi skierowanej (przepustowosc w "druga" strone)
     void add_directed_edge(int u, int v, int capacity) {
         adj[u].push_back(v);
         adj[v].push_back(u);
@@ -588,3 +587,16 @@ int main() {
     IN.close();
     return 0;
 }
+
+/*
+#include <iostream>
+#include <vector>
+#include <limits>
+#include <queue>
+#include <random>
+#include <cassert>
+#include <ctime>
+#include <fstream>
+#include <chrono>
+#include <thread>
+*/
