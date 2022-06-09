@@ -402,6 +402,7 @@ int getFlowBellmanFord(int src, int sink) {
     return totcost;
 }
 
+//szukanie maksymalnego przeplywu minimalnym kosztem
 int minCostBellmanFord(vector<vector<int>> capIn, vector<vector<int>> costIn) {
     cap = capIn;
     cost = costIn;
